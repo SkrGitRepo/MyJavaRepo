@@ -1,8 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<!-- let's add tag srping:url -->
+<spring:url value="/resources/css/crunchify.css" var="crunchifyCSS" />
+<spring:url value="/resources/js/crunchify.js" var="crunchifyJS" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<link href="${crunchifyCSS}" rel="stylesheet" />
+<script src="${crunchifyJS}"></script>
+<!-- Finish adding tags -->
+
 <title>Spring MVC Tutorial by Crunchify - Hello World Spring MVC
 	Example</title>
 <style type="text/css">
@@ -16,8 +25,12 @@ body {
 	<br>
 	<br>
 	<div style="font-family: verdana; padding: 10px; border-radius: 10px; font-size: 12px; text-align:center;">
+ 		
+ 		<h2>Checkout this font color. Loaded from 'crunchify.css' file under '/WebContent/resources/' folder</h2>
  
-		Spring MCV Tutorial by <a href="http://crunchify.com">Crunchify</a>.
+		<div id="crunchifyMessage"></div>
+ 		
+		<br/>Spring MCV Tutorial by <a href="http://crunchify.com">Crunchify</a>.
 		Click <a
 			href="http://crunchify.com/category/java-web-development-tutorial/"
 			target="_blank">here</a> for all Java and <a
