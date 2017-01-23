@@ -50,6 +50,14 @@
     <url-pattern>/redirect</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>SendNotificationToApns</servlet-name>
+    <servlet-class>com.cisco.brmspega.servlet.SendIOSNotification</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SendNotificationToApns</servlet-name>
+    <url-pattern>/sendnotification</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>PostStatus</servlet-name>
     <servlet-class>com.app.PostBrmsStatus</servlet-class>
   </servlet>
@@ -81,8 +89,7 @@
     <servlet-name>monitorConfigServletNew</servlet-name>
     <url-pattern>/monitorConfigNew</url-pattern>
   </servlet-mapping>
-  
-   <servlet>
+  <servlet>
     <servlet-name>monitorConfigServlet</servlet-name>
     <servlet-class>com.cisco.brmspega.servlet.BrmsMonitorAdminServlet</servlet-class>
   </servlet>

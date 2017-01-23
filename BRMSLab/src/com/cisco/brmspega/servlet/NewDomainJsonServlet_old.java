@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.catalina.tribes.group.interceptors.DomainFilterInterceptor;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
-import org.codehaus.jackson.map.ObjectMapper;
+//import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

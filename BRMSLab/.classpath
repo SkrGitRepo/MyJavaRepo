@@ -15,8 +15,27 @@
 	<classpathentry exported="true" kind="lib" path="C:/CiscoJars/java-json.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/CiscoJars/json-simple-1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/MyInstallations/eclipse-jee-mars-2-win32-x86_64/eclipse/BRMS_TEST_Workspace/BRMSAdmin2/WebContent/WEB-INF/lib/commons-io-1.4.jar"/>
-	<classpathentry kind="lib" path="C:/CiscoJars/jackson-all-1.7.5.jar/jackson-all-1.7.5.jar"/>
 	<classpathentry kind="lib" path="C:/CiscoJars/data.jar"/>
 	<classpathentry kind="lib" path="C:/CiscoJars/CiscoBrmsPega.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/apns-0.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/logback-core-0.9.6.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/slf4j-1.7.22/slf4j-api-1.7.22.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/slf4j-1.7.22/slf4j-api-1.7.22-sources.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/slf4j-1.7.22/slf4j-ext-1.7.22.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/slf4j-1.7.22/slf4j-ext-1.7.22-sources.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/slf4j-1.7.22/slf4j-jcl-1.7.22.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/slf4j-1.7.22/slf4j-jcl-1.7.22-sources.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/slf4j-1.7.22/slf4j-jdk14-1.7.22.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/slf4j-1.7.22/slf4j-jdk14-1.7.22-sources.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/slf4j-1.7.22/slf4j-log4j12-1.7.22.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/slf4j-1.7.22/slf4j-log4j12-1.7.22-sources.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/slf4j-1.7.22/slf4j-migrator-1.7.22.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/slf4j-1.7.22/slf4j-nop-1.7.22.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/slf4j-1.7.22/slf4j-nop-1.7.22-sources.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/slf4j-1.7.22/slf4j-simple-1.7.22.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/slf4j-1.7.22/slf4j-simple-1.7.22-sources.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/com.fasterxml.jackson.core.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/com.fasterxml.jackson.databind.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/com.fasterxml.jackson.annotations.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
