@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.app.ApnsNotificationtest;
+import com.app.PostIOSNotification;
 import com.notnoop.apns.APNS;
 import com.notnoop.apns.ApnsService;
 
 /**
- * Servlet implementation class SendIOSNotification
+ * Servlet implementation class PostIOSNotification
  */
-@WebServlet("/SendIOSNotification")
+@WebServlet("/PostIOSNotification")
 public class SendIOSNotification extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -38,8 +38,8 @@ public class SendIOSNotification extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		ApnsNotificationtest apnsNotification = new ApnsNotificationtest();
-		apnsNotification.sendNotification();
+		PostIOSNotification postIOSNotification = new PostIOSNotification();
+		postIOSNotification.sendNotification(null, null, null);
 		
 		/*ApnsService service = APNS.newService().withCert("/CiscoJars/ibpmcertificate.p12", "cisco123")
 			    .withSandboxDestination()

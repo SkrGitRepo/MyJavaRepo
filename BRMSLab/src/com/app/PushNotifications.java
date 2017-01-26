@@ -56,7 +56,7 @@ public class PushNotifications {
         
         String payload = APNS.newPayload()
                 .alertBody(message)
-                .alertTitle("test alert title")
+                //.alertTitle("test alert title")
                 .sound("default")
                 .customField("custom", "custom value").build();
 

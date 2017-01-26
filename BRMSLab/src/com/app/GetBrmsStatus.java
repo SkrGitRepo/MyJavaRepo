@@ -20,7 +20,7 @@ import com.cisco.dataconnect.process.Load;
 import sun.java2d.pipe.OutlineTextRenderer;
 
 /**
- * Servlet implementation class GetBrmsStatus
+ * Servlet implementation class StoreIOSDeviceToken
  */
 @WebServlet("/GetBrmsStatus")
 public class GetBrmsStatus extends HttpServlet {
