@@ -60,7 +60,7 @@
 				
         		if(sendType!=null && sendType.equalsIgnoreCase("mon")){
             		 
-            		 String msg = iosNotification.sendNotification(sendType,"eabv", null);
+            		 String msg = iosNotification.sendNotification(sendType,"dev","eabv", null);
             		 //out.println(msg);
             		 if (msg.equalsIgnoreCase("success")) {
             			 out.println("<br/><center><b>"+msg.toUpperCase()+": Notification sent for MONITORING... </b></center>");
@@ -69,7 +69,7 @@
             		 }
             		 
         		} else if(sendType!=null && sendType.equalsIgnoreCase("status")) {
-        			String msg = iosNotification.sendNotification(sendType,"gssc","DRD-1235492");
+        			String msg = iosNotification.sendNotification(sendType,"prod","gssc","DRD-1235492");
         			 
         			if (msg.equalsIgnoreCase("success")) {
             			 out.println("<br/><center><b>"+msg.toUpperCase()+": Notification sent for STATUS...  </b></center>");
