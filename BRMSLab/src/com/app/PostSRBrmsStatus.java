@@ -51,14 +51,14 @@ import org.apache.http.message.BasicNameValuePair;
 /**
  * Servlet implementation class PostSRBrmsStatus
  */
-@WebServlet("/NewPostBrmsStatus")
-public class NewPostBrmsStatus extends HttpServlet {
+@WebServlet("/PostSRBrmsStatus")
+public class PostSRBrmsStatus extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NewPostBrmsStatus() {
+    public PostSRBrmsStatus() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -91,36 +91,39 @@ public class NewPostBrmsStatus extends HttpServlet {
 		 * System.out.println("REQUESTED URL :" + request.getRequestURL());
 		 * System.out.println("REQUESTED URI :" + request.getRequestURI());
 		 * System.out.println("REQUESTED SERVLET PATH :" +
-		 * request.getServletPath()); webPage =
-		 * "http://localhost:8090/J2EESampleProject/status/all/cvc";
+		 * request.getServletPath());
 		 */
+		  String webPage = "http://localhost:8090/nprd2/brmsadmin/status/all";
+		 
 
-		// try {
-		/*
-		 * String name = "brm.gen"; String password = "brmGen123"; String
-		 * statusResponse = null; String authString = name + ":" + password;
-		 * String decodedValue =
-		 * DatatypeConverter.printBase64Binary(authString.getBytes("UTF-8"));
-		 * String authStringEnc = decodedValue;
-		 * 
-		 * URL url = new URL(webPage); HttpURLConnection httpCon =
-		 * (HttpURLConnection) url.openConnection();
-		 * httpCon.setRequestProperty("Authorization", "Basic " +
-		 * authStringEnc); int statusCode = httpCon.getResponseCode();
-		 * InputStream is = httpCon.getInputStream(); InputStreamReader isr =
-		 * new InputStreamReader(is);
-		 * 
-		 * // String resContent = http.getContentEncoding().toString();
-		 * 
-		 * int numCharsRead; char[] charArray = new char[1024]; StringBuffer sb
-		 * = new StringBuffer(); while ((numCharsRead = isr.read(charArray)) >
-		 * 0) { sb.append(charArray, 0, numCharsRead); } statusResponse =
-		 * sb.toString();
-		 */ 
-		//String postUrl = "http://localhost:8085/J2EESampleProject/getstatus";
+		//try {
+		
+		 String name = "brm.gen"; String password = "brmGen123"; String
+		 statusResponse = null; String authString = name + ":" + password;
+		 String decodedValue =
+		 DatatypeConverter.printBase64Binary(authString.getBytes("UTF-8"));
+		 String authStringEnc = decodedValue;
+		  
+		 URL url = new URL(webPage); 
+		 HttpURLConnection httpCon =
+		 (HttpURLConnection) url.openConnection();
+		 httpCon.setRequestProperty("Authorization", "Basic " +
+		 authStringEnc); 
+		 int statusCode = httpCon.getResponseCode();
+		 InputStream is = httpCon.getInputStream(); InputStreamReader isr =		 new InputStreamReader(is);
+		
+		 //String resContent = http.getContentEncoding().toString();
+		 
+		 int numCharsRead; char[] charArray = new char[1024]; StringBuffer sb
+		  = new StringBuffer(); while ((numCharsRead = isr.read(charArray)) >
+		  0) { sb.append(charArray, 0, numCharsRead); } statusResponse =
+		  sb.toString();
+		 
+		  // String postUrl =
+			// "http://localhost:8085/J2EESampleProject/getstatus";
 			// String postUrl =
 			// "http://brms-test-5:7010/nprd2/brmsadmin/getstatus";
-		if (downDomainsLifecycle.equalsIgnoreCase("prod")) {
+		/*if (downDomainsLifecycle.equalsIgnoreCase("prod")) {
 			postdata = "{" + "\"notification\": {" + "\"title\": \"Cisco iBPM Notification\",\"body\" : \"Domain(s):"
 					+ downDomains + "are down\"," + "\"icon\" : \"ic_add_alert_black_24dp.png\"," + "}," + "\"data\": {"
 					+ "\"url\": \"https://ibpm.cisco.com/prd2/brmsadmin/status\","
@@ -134,18 +137,22 @@ public class NewPostBrmsStatus extends HttpServlet {
 					+ "\"url\": \"https://ibpm.cisco.com/prd2/brmsadmin/status\","
 					+ "\"domainUrl\": \"https://ibpm.cisco.com/ea/brmsadmin\"," + "}," + "\"to\":\"/topics/myTopic\""
 					+ "}";
-		}
+		}*/
 
-		String postUrl = "https://gcm-http.googleapis.com/gcm/send";
+		//String postUrl = "https://gcm-http.googleapis.com/gcm/send";
 		
 		//System.out.println(" POST DATA ::" + postdata);
-		// postJson(statusResponse,postUrl);
-		postJson(postdata,postUrl);
+		//postJson(statusResponse,postUrl);
+		// postJson(postdata,postUrl);
 
 		/*
 		 * } catch (MalformedURLException e) { e.printStackTrace(); } catch
 		 * (IOException e) { e.printStackTrace(); }
 		 */
+		//String postUrl = "http://localhost:8090/J2EESampleProject/getstatus";
+		//String postUrl = "http://brms-test-5:7010/nprd1/brmsadmin/work/info/csc";
+		String postUrl = "http://localhost:8090/nprd2/brmsadmin/work/info/cpe/history";
+		postJson(statusResponse,postUrl);
 	}
 
 	@SuppressWarnings("unused")
@@ -162,7 +169,8 @@ public class NewPostBrmsStatus extends HttpServlet {
 		post.setHeader("Content-Type", "application/json");
 		post.setHeader("Accept", "application/json");
 		post.setHeader("Authorization", "key=AIzaSyBTXdvWyrcRfyTS7sfZ100Wp7IfLkSMaxY");
-		StringEntity se = new StringEntity(jsonData);
+		StringEntity se = new StringEntity( "{  $or: [ {'_id' : 'RS-55934'} ] }" );
+		//StringEntity se = new StringEntity(jsonData);
 		post.setEntity(se);
 
 		HttpResponse response = client.execute(post);
@@ -179,6 +187,7 @@ public class NewPostBrmsStatus extends HttpServlet {
 		while ((numCharsRead = isr.read(charArray)) > 0) {
 			sb.append(charArray, 0, numCharsRead);
 		}
-		System.out.println("RESPONSE MESSAGE:"+sb.toString());
+		String respMessage = sb.toString();
+		System.out.println("RESPONSE MESSAGE:"+respMessage);
 	}
 }

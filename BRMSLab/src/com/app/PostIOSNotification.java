@@ -14,11 +14,12 @@ import org.apache.commons.io.FileUtils;
 import com.cisco.brmspega.servlet.StoreIOSDeviceToken;
 import com.notnoop.apns.APNS;
 import com.notnoop.apns.ApnsService;
+import com.notnoop.apns.ApnsServiceBuilder;
 import com.notnoop.apns.PayloadBuilder;
 
 public class PostIOSNotification {
 
-	public String sendNotification(String sType,String domain,String sr_id) throws IOException {
+	public String sendNotification(String sType,String lifeCycle,String domain,String sr_id) throws IOException {
 		// TODO Auto-generated method stub
 		
 		String message = "Failed";
@@ -29,8 +30,17 @@ public class PostIOSNotification {
 			    .withSandboxDestination()
 			    .build();
 		
+		//ApnsService service = APNS.newService().withCert("/opt/brms/shared/brmsclient.jks", "cisco123")
+		//	    .withSandboxDestination()
+		//	    .build();
+		
+		
 		if (sType != null && sType.equalsIgnoreCase("mon") && domain != null) {
-			notificationBody = "Cisco IBPM Mon Notification. Domain(s):" + domain +" are down.";
+			if ( lifeCycle != null && lifeCycle.equalsIgnoreCase("prod")) {
+				notificationBody = "TESTING :: Cisco IBPM Mon Notification. Domain(s):" + domain +" are down.";
+			} else {
+				notificationBody = "TESTING :: Cisco IBPM Mon Notification."+ lifeCycle + "-Domain(s):" + domain +" are down.";
+			}
 			payload = APNS.newPayload().alertBody(notificationBody)
 					.badge(1)
 					.customField("Identifier", "monitor")
@@ -58,7 +68,7 @@ public class PostIOSNotification {
 		
 		if (payload != null && !tokenList.isEmpty()) {
 			for (String token : tokenList) {
-				//service.push(token, payload);
+				service.push(token, payload);
 				message = "success";
 			}
 			
@@ -77,7 +87,6 @@ public class PostIOSNotification {
 
 	}
 
-	
 	
 	public List<String> get_device_token_list() throws IOException {
 		
