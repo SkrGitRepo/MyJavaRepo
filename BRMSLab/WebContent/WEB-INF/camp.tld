@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN" "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+
+<!-- Tag Library for Calling Camp Tags -->
+<taglib>
+	<tlibversion>1.0</tlibversion>
+	<jspversion>1.1</jspversion>
+	<shortname>CAMP</shortname>
+	<info>Tag library for using the CAMP PageComposer</info>
+	<tag>
+		<name>PageComposerTag</name>
+		<tagclass>com.cisco.appsui.taglib.PageComposerTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<info> This tag will call the renderPage method of PageComposer</info>
+		<!--Descriptions of the attributes -->
+		<!--Pass the pageComposer object as an attribute -->
+		<attribute>
+			<name>pageComposer</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>	
+	</tag>
+	<tag>
+			<name>AppHeaderTag</name>
+			<tagclass>com.cisco.appsui.taglib.AppHeaderTag</tagclass>
+			<bodycontent>empty</bodycontent>
+			<info> This tag will call the renderPage method of PageComposer</info>
+			<!--Descriptions of the attributes -->
+			<!--Pass the pageComposer object as an attribute -->
+			<attribute>
+				<name>pageComposer</name>
+				<required>true</required>
+				<rtexprvalue>true</rtexprvalue>
+			</attribute>	
+	</tag>
+	<tag>
+			<name>AppFooterTag</name>
+			<tagclass>com.cisco.appsui.taglib.AppFooterTag</tagclass>
+			<bodycontent>empty</bodycontent>
+			<info> This tag will call the renderPage method of PageComposer</info>
+			<!--Descriptions of the attributes -->
+			<!--Pass the pageComposer object as an attribute -->
+			<attribute>
+				<name>pageComposer</name>
+				<required>true</required>
+				<rtexprvalue>true</rtexprvalue>
+			</attribute>	
+	</tag>
+
+	<tag>
+			<name>AppNavTag</name>
+			<tagclass>com.cisco.appsui.taglib.AppNavTag</tagclass>
+			<bodycontent>empty</bodycontent>
+			<info> This tag will call the getAppnav method of AppNavGenerator</info>
+			<!--Descriptions of the attributes -->
+			<!--Pass the AppNavGenerator object as an attribute -->
+			<!--Pass the Cuurent Tab And Current Step as an attribute -->
+			<attribute>
+				<name>appNavGenerator</name>
+				<required>true</required>
+				<rtexprvalue>true</rtexprvalue>
+			</attribute>	
+			<attribute>
+				<name>currentTab</name>
+				<required>true</required>
+				<rtexprvalue>true</rtexprvalue>
+			</attribute>
+			<attribute>
+				<name>currentStep</name>
+				<required>false</required>
+				<rtexprvalue>true</rtexprvalue>
+			</attribute>
+			<attribute>
+				<name>tabsType</name>
+				<required>false</required>
+				<rtexprvalue>true</rtexprvalue>
+			</attribute>
+			<attribute>
+				<name>stepsType</name>
+				<required>false</required>
+				<rtexprvalue>true</rtexprvalue>
+			</attribute>
+	</tag>
+
+	<tag>
+			<name>SteppedProcessTag</name>
+			<tagclass>com.cisco.appsui.taglib.SteppedProcessTag</tagclass>
+			<bodycontent>JSP</bodycontent>
+			<info> This tag will call the getAppNavSteppedProcess method of AppNavSteppedProcess</info>
+			<!--Descriptions of the attributes -->
+			<!--Pass the AppNavSteppedProcess object as an attribute -->
+			<!--Pass the Current Step as an attribute -->
+			<attribute>
+				<name>steppedProcess</name>
+				<required>false</required>
+				<rtexprvalue>true</rtexprvalue>
+			</attribute>				
+			<attribute>
+				<name>currentStep</name>
+				<required>true</required>
+				<rtexprvalue>true</rtexprvalue>
+			</attribute>
+	</tag>
+
+	<tag>
+			<name>Step</name>
+			<tagclass>com.cisco.appsui.taglib.StepTag</tagclass>
+			<bodycontent>JSP</bodycontent>
+			<info>adds the step name to steps list in AppNavSteppedProcess </info>
+			<!--Descriptions of the attributes -->			
+			<attribute>
+				<name>stepName</name>
+				<required>true</required>
+				<rtexprvalue>true</rtexprvalue>
+			</attribute>	
+	</tag>
+
+	<tag>
+			<name>MessageBoxTag</name>
+			<tagclass>com.cisco.appsui.taglib.MessageBoxTag</tagclass>
+			<bodycontent>empty</bodycontent>
+			<info> This tag will call the getMessageBox() method of MessageBox Class</info>
+			<!--Descriptions of the attributes -->			
+			<attribute>
+				<name>messageBox</name>
+				<required>false</required>
+				<rtexprvalue>true</rtexprvalue>
+			</attribute>		
+			<attribute>
+				<name>type</name>
+				<required>false</required>
+				<rtexprvalue>true</rtexprvalue>
+			</attribute>
+			<attribute>
+				<name>message</name>
+				<required>false</required>
+				<rtexprvalue>true</rtexprvalue>
+			</attribute>
+			<attribute>
+				<name>title</name>
+				<required>false</required>
+				<rtexprvalue>true</rtexprvalue>
+			</attribute>
+			<attribute>
+				<name>messageList</name>
+				<required>false</required>
+				<rtexprvalue>true</rtexprvalue>
+			</attribute>
+
+	</tag>
+</taglib>

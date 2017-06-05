@@ -1,0 +1,19 @@
+
+<!-- Copyright (c) 2000-2002 Appliant.com, Inc. All rights reserved. -->
+<script language="JavaScript1.2"><!--
+if (navigator.appName == "Netscape" &&
+    parseInt(navigator.appVersion.charAt(0)) <= 4)
+{
+    //do nothing - NS4 not supported by WebInsight
+} else {
+    document.write("<span style=\"behavior:url(#default#clientCaps)\" id=\"oCC\"></span>");
+    if (typeof FM_Key == "undefined" && location.protocol.match(/^http/)) {
+        _FTop=new Date().getTime();
+        _FTopKey="3.3.48.3";
+        document.write("<s" + "cript s" + "rc=\"" + location.protocol +
+                       "//" + location.hostname + "/perfmon/appliant/WIEE/js/wi.js\">" +
+                       "</s" + "cript>");
+    }
+} //-->
+</script>
+<!-- End Appliant.com code -->
