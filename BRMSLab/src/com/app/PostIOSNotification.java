@@ -26,13 +26,13 @@ public class PostIOSNotification {
 		String payload = null;
 		String notificationBody;
 		
-		ApnsService service = APNS.newService().withCert("/CiscoJars/ibpmcertificate.p12", "cisco123")
+		/*ApnsService service = APNS.newService().withCert("/CiscoJars/ibpmcertificate.p12", "cisco123")
+			    .withSandboxDestination()
+			    .build();*/
+		
+		ApnsService service = APNS.newService().withCert("/opt/brms/shared/brmsclient.jks", "password")
 			    .withSandboxDestination()
 			    .build();
-		
-		//ApnsService service = APNS.newService().withCert("/opt/brms/shared/brmsclient.jks", "cisco123")
-		//	    .withSandboxDestination()
-		//	    .build();
 		
 		
 		if (sType != null && sType.equalsIgnoreCase("mon") && domain != null) {
@@ -86,10 +86,9 @@ public class PostIOSNotification {
 		return message;
 
 	}
-
+	
 	
 	public List<String> get_device_token_list() throws IOException {
-		
 		List<String> deviceTokeList = new ArrayList<String>();
 		String folderLoc = "/opt/brms/shared/scripts";//PropertyLoader.getInstance().getProperty("monitor_config_base");
 		File token_lists_file = new File(folderLoc+"/ios_device_token_list.txt");

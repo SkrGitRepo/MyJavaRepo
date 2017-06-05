@@ -153,7 +153,7 @@ public class EmanPingJob implements Runnable {
         System.out.println("Name of System : "+hostname );
         System.out.println("IP Address of System : "+host );
         System.out.println("port of tomcat server : "+port);
-        String url = "http://"+hostname+":"+port+"/J2EESampleProject/poststatus";
+        String url = "http://"+hostname+":"+port+"/nprd2/brmsadmin/poststatus";
 		return url;
 	}
 	
@@ -174,7 +174,8 @@ public class EmanPingJob implements Runnable {
 		Iterator<File> fileListIterator = null;
 		
 		//String[] lifecycle = { "POC" };
-		String[] lifecycle = { "DEV" };
+		//String[] lifecycle = { "PRD" };
+		String[] lifecycle = { "PRD","STG","DEV","LT" };
 		if ( lifecycle.length >= 4 && lifecycle[4].equals("poc")) {
 			MYTHREADS = 2;
 		}

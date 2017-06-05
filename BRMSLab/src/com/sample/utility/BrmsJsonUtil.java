@@ -26,6 +26,7 @@ import com.google.gson.GsonBuilder;
 
 public class BrmsJsonUtil {
 	private static final String configFileFolderLoc =  "/opt/brms/shared/scripts/";
+	
 	public static String getJson(String searchLifecycle,String searchDomain, String searchApp) throws IOException {
 		Collection<File> fileList = new ArrayList<File>();
 		Iterator<File> fileListIterator = null;
@@ -35,6 +36,7 @@ public class BrmsJsonUtil {
 		String [] lcList;
 		if ( (searchLifecycle == null) || (searchLifecycle.equalsIgnoreCase("all"))) {
 			lcList = new String[] {"PRD","STG","DEV","LT","POC"};
+			//lcList = new String[] {"PRD"};
 		} else {
 			lcList = new String[] {searchLifecycle.toUpperCase()};
 		}

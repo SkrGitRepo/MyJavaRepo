@@ -1,5 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="java.util.TreeMap"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.net.URL"%>
@@ -15,7 +16,7 @@
 
 
 <%
-String strURLPath = "http://localhost:8090/nprd2/brmsadmin/";//ParamUtil.getURLPathFromSession(request);
+String strURLPath = "http://localhost:8082/nprd2/brmsadmin/";//ParamUtil.getURLPathFromSession(request);
 String domainApp =  request.getParameter("domainApp");
 String userID	=	"sumkuma2";
 if(null == domainApp || "".equals(domainApp))
@@ -88,6 +89,104 @@ for(String fileLine : monitor_config_lines){
 		SMTP_PASSWD=value;
 }
 
+/*************Rolling Restart Config File**************************/
+File rr_config_file = new File(folderLoc+"/rr.conf");
+if (!rr_config_file.getParentFile().exists()) {
+	rr_config_file.getParentFile().mkdir();
+}
+if (!rr_config_file.exists()) {
+	rr_config_file.getParentFile().mkdir();
+	rr_config_file.createNewFile();
+}
+
+List<String> rr_config_lines = FileUtils.readLines(rr_config_file);
+String RR_EMAIL_TO="";
+String RR_EMAIL_FROM="";
+String RR_WAIT_TIME="";
+
+for(String fileLine : rr_config_lines){
+	String key = fileLine.split("=")[0];
+	String value=fileLine.split("=")[1];
+	if(fileLine.contains("RR_EMAIL_TO"))
+		RR_EMAIL_TO=value;
+	else if(fileLine.contains("RR_EMAIL_FROM"))
+		RR_EMAIL_FROM=value;
+	else if(fileLine.contains("RR_WAIT_TIME"))
+		RR_WAIT_TIME=value;
+}
+/****************************************************************/
+
+/*************Rolling Restart Config File**************************/
+File new_domain_ping_cfg_file = new File(folderLoc+"/new_ping_url_domain_list.txt");
+if (!new_domain_ping_cfg_file.getParentFile().exists()) {
+	new_domain_ping_cfg_file.getParentFile().mkdir();
+}
+if (!new_domain_ping_cfg_file.exists()) {
+	new_domain_ping_cfg_file.getParentFile().mkdir();
+	new_domain_ping_cfg_file.createNewFile();
+}
+
+List<String> new_ping_env_domain_list = FileUtils.readLines(new_domain_ping_cfg_file);
+String DEV_LIST="";
+String STAGE_LIST="";
+String LT_LIST="";
+String PROD_LIST="";
+
+for(String fileLine : new_ping_env_domain_list){
+	String key = fileLine.split("=")[0];
+	String value=fileLine.split("=")[1];
+	if(key.equalsIgnoreCase("DEV"))
+		DEV_LIST=value;
+	else if(key.equalsIgnoreCase("STAGE") || key.equalsIgnoreCase("STG"))
+		STAGE_LIST=value;
+	else if(key.equalsIgnoreCase("LT"))
+		LT_LIST=value;
+	else if(key.equalsIgnoreCase("PROD") || key.equalsIgnoreCase("PRD"))
+		PROD_LIST=value;
+}
+/****************************************************************/
+
+/* File mon_url_dom_list_file = new File(folderLoc+"/new_ping_url_domain_list.txt");
+if (!mon_url_dom_list_file.getParentFile().exists()) {
+	mon_url_dom_list_file.getParentFile().mkdir();
+}
+if (!mon_url_dom_list_file.exists()) {
+	mon_url_dom_list_file.getParentFile().mkdir();
+	mon_url_dom_list_file.createNewFile();
+}
+
+List<String> new_mon_domain_lines = FileUtils.readLines(monitor_config_file);
+String LIFECYCLE="";
+String domain_name="";
+List<String> devSet = new ArrayList<String>();
+List<String> stgSet = new ArrayList<String>();
+List<String> ltSet = new ArrayList<String>();
+List<String> prdSet = new ArrayList<String>();
+//create map to store
+Map<String, List<String>> urlDomMap = new HashMap<String, List<String>>();
+
+//boolean INCREMENTAL_TIMEOUTS=false;
+//String MON_DIR="";
+for(String fileLine : new_mon_domain_lines) {
+	LIFECYCLE = fileLine.split(",")[0];
+	domain_name=fileLine.split(",")[1];
+	if(LIFECYCLE.equalsIgnoreCase("DEV"))
+		devSet.add(domain_name);
+	else if(LIFECYCLE.equalsIgnoreCase("STG"))
+		stgSet.add(domain_name);
+	else if(LIFECYCLE.equalsIgnoreCase("LT"))
+		ltSet.add(domain_name);
+	else if(LIFECYCLE.equalsIgnoreCase("PRD"))
+		prdSet.add(domain_name);
+}
+
+urlDomMap.put("DEV",devSet);
+urlDomMap.put("STG",stgSet);
+urlDomMap.put("PRD",prdSet);
+urlDomMap.put("LT",ltSet); */
+ 
+/****************************************************************/
+
 
 /*************Alert Config File**************************/
 
@@ -96,6 +195,7 @@ File alert_lists_file = new File(folderLoc+"/alert_lists.conf");
 if (!alert_lists_file.getParentFile().exists()) {
 	alert_lists_file.getParentFile().mkdir();
 }
+
 if (!alert_lists_file.exists()) {
 	alert_lists_file.createNewFile();
 }
@@ -248,6 +348,19 @@ TreeSet<String> sortedEDDomainList =  new TreeSet<String>(EDdomainList);
 			return true;
 		}
 		
+		function updateDomainList(path){
+			document.getElementById("formAction").value="UPDATE_PING_DOMAIN_LIST";
+			document.brmsMonitorAdminform.action = path;
+			return true;
+		}
+		
+		
+		function updateRRConfig(path){
+			document.getElementById("formAction").value="UPDATE_RR_CONFIG";
+			document.brmsMonitorAdminform.action = path+"/monitorConfig?view=RollingRestartConfig";
+			return true;
+		}
+		
 		function updateEnvAppAlertDetails(path){
 			var emailIdsValid=true;
 			var filter=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
@@ -350,6 +463,11 @@ TreeSet<String> sortedEDDomainList =  new TreeSet<String>(EDdomainList);
 			document.brmsMonitorAdminform.submit();
 		}
 		
+		function LoadRollingRestartDet(path){
+			document.brmsMonitorAdminform.action = path + "/jsp/brmsMonitorAdmin.jsp?view=RollingRestartConfig";
+			document.brmsMonitorAdminform.submit();
+		}
+		
 		
 		
 		function onWindowLoad(){
@@ -364,17 +482,26 @@ TreeSet<String> sortedEDDomainList =  new TreeSet<String>(EDdomainList);
 			if(view.toUpperCase() == 'MonitorConfig'.toUpperCase()){
 				document.getElementById("MonitorConfigDiv").style.display='block';
 				document.getElementById("AlertConfigDiv").style.display='none';
-				document.getElementById("DisableEnableAlertDiv").style.display='none';				
+				document.getElementById("DisableEnableAlertDiv").style.display='none';
+				document.getElementById("RRConfigDiv").style.display='none';
 			}
 			if(view.toUpperCase() == 'AlertConfig'.toUpperCase()){
 				document.getElementById("MonitorConfigDiv").style.display='none';
 				document.getElementById("AlertConfigDiv").style.display='block';
-				document.getElementById("DisableEnableAlertDiv").style.display='none';	
+				document.getElementById("DisableEnableAlertDiv").style.display='none';
+				document.getElementById("RRConfigDiv").style.display='none';
 			}
 			if(view.toUpperCase() == 'DisableEnableAlert'.toUpperCase()){
 				document.getElementById("MonitorConfigDiv").style.display='none';
 				document.getElementById("AlertConfigDiv").style.display='none';
-				document.getElementById("DisableEnableAlertDiv").style.display='block';	
+				document.getElementById("DisableEnableAlertDiv").style.display='block';
+				document.getElementById("RRConfigDiv").style.display='none';
+			}
+			if(view.toUpperCase() == 'RollingRestartConfig'.toUpperCase()){
+				document.getElementById("MonitorConfigDiv").style.display='none';
+				document.getElementById("AlertConfigDiv").style.display='none';
+				document.getElementById("DisableEnableAlertDiv").style.display='none';
+				document.getElementById("RRConfigDiv").style.display='block';	
 			}
 			
 			var selectDomObj=document.getElementById('selectDom');
@@ -463,6 +590,7 @@ TreeSet<String> sortedEDDomainList =  new TreeSet<String>(EDdomainList);
 		<input type="button" id="LoadMonitorConfig" onclick="LoadMonitorDet('<%= strURLPath %>');" value="Monitor Config Details"/>&nbsp;
 		<input type="button" id="LoadAlertConfig" onclick="LoadAlertDet('<%= strURLPath %>');" value="Alert Config Details"/>&nbsp;
 		<input type="button" id="LoadEnableDisable" onclick="LoadEnableDisableDet('<%= strURLPath %>');" value="Enable Disable Details"/>
+		<input type="button" id="LoadRollingRestart" onclick="LoadRollingRestartDet('<%= strURLPath %>');" value="RR Config Details"/>
 		<br>
 		<div id="MonitorConfigDiv" style="display: none;">
 			<fieldset style="width:98%;margin: auto;text-align:center;" >
@@ -484,7 +612,9 @@ TreeSet<String> sortedEDDomainList =  new TreeSet<String>(EDdomainList);
 				</td>
 				</tr>
 			</table>
+			
 			<br/>
+			
 			<table border="1" cellspacing="2" cellpadding="2" bgcolor="#cee7ff" class="brmsTable" width="100%">
 				<tr>
 					<th>SMTP_HOST</th><th>SMTP_PORT</th><th>SMTP_USER</th><th>SMTP_PASSWORD</th>
@@ -502,7 +632,88 @@ TreeSet<String> sortedEDDomainList =  new TreeSet<String>(EDdomainList);
 				</tr>
 			</table>
 			</fieldset>
+			
+			<br/>
+			<fieldset style="width:98%;margin: auto;text-align:center;" >
+			<legend class="pageText"><b>Enable new ping url for domains: </b></legend>
+			<table border="1" cellspacing="2" cellpadding="2" bgcolor="#cee7ff" class="brmsTable" width="100%">
+				<tr>
+					<th>Lifecycle/Env</th><th>Domain List</th>
+				</tr>
+				<tr>
+					<td align="center"><input type="text" name="MON_ENV" size="30" value="DEV" disabled></td>
+					<td align="center"><textarea name="DEV_DOMAIN_LIST" rows="2" cols="30"><%=DEV_LIST%></textarea></td>
+				</tr>
+				<tr>
+					<td align="center"><input type="text" name="MON_ENV" size="30" value="STAGE" disabled></td>
+					<td align="center"><textarea name="STAGE_DOMAIN_LIST" rows="2" cols="30"><%=STAGE_LIST%></textarea></td>
+				</tr>
+				<tr>
+					<td align="center"><input type="text" name="MON_ENV" size="30" value="LT" disabled></td>
+					<td align="center"><textarea name="LT_DOMAIN_LIST" rows="2" cols="30"><%=LT_LIST%></textarea></td>
+				</tr>
+				<tr>
+					<td align="center"><input type="text" name="MON_ENV" size="30" value="PROD" disabled></td>
+					<td align="center"><textarea name="PROD_DOMAIN_LIST" rows="2" cols="30"><%=PROD_LIST%></textarea></td>
+				</tr>
+				<tr>
+				<td colspan="5" align="center">
+					<input type="submit" id="modifyDomainList" onclick="updateDomainList('<%= strURLPath %>/monitorConfig');" value="Update"/>
+				</td>
+				</tr>
+			</table>
+			
+			</fieldset>
 		</div>	
+		
+		<!-- -----------------------------------------RR CONFIG-------------------------------------------- -->
+		<br>
+		<div id="RRConfigDiv" style="display: none;">
+			<fieldset style="width:98%;margin: auto;text-align:center;" >
+			<legend class="pageText"><b>Rolling Restart Configuration Details: </b></legend>
+			<br/>
+			<table border="1" cellspacing="2" cellpadding="2" bgcolor="#cee7ff" class="brmsTable" width="100%">
+				<tr>
+					<th>RR_TO_EMAIL</th><th>RR_FROM_EMAIL</th><th>RR_WAIT_TIME</th>
+				</tr>
+				<tr>
+					<td align="center"><textarea name="RR_EMAIL_TO" rows="2" cols="50" onkeypress="return isValidEmailChars(event)"><%=RR_EMAIL_TO%></textarea></td>
+					<td align="center"><textarea name="RR_EMAIL_FROM" rows="2" cols="50" onkeypress="return isValidEmailChars(event)"><%=RR_EMAIL_FROM%></textarea></td>
+					<td align="center"><input type="text" size="30" name="RR_WAIT_TIME" id="RR_WAIT_TIME" value="<%=RR_WAIT_TIME%>"></td>
+				</tr>
+				<tr>
+				<td colspan="5" align="center">
+					<input type="submit" id="modifyRRConfig" onclick="updateRRConfig('<%= strURLPath %>');" value="Update"/>
+				</td>
+				</tr>
+			</table>
+			</fieldset>
+		</div>	
+		<!-- ------------------------------------------------------------------------------------- -->		
+		<!-- ----------------------------------------------------------------------------------------------- -->
+<%-- 		<div id="MonitorNewUrlDiv" style="display: none;">
+			<fieldset style="width:98%;margin: auto;text-align:center;" >
+			<legend class="pageText"><b>Monitor Configuration Details: </b></legend>
+			<table border="1" cellspacing="2" cellpadding="2" bgcolor="#cee7ff" class="brmsTable" width="100%">
+				<tr>
+					<th>LIFECYCLE(ENV.)</th><th>DOMAIN LIST(,)</th>
+				</tr>
+				<tr>
+					<td align="center"><input type="text" size="30" name="lifecycle" id="lifecycle" value="<%=ENV_LIST%>" placeholder="Only [0-9] allowed" onkeypress="return  isNumber(event)"></td>
+					<td align="center"><textarea name="domainlist" rows="2" cols="70" ><%=DOMAIN_LIST%></textarea></td>
+				</tr>
+				<tr>
+				<td colspan="5" align="center">
+					<input type="submit" id="modifyMonitorUrlConfig" onclick="updateMonitorUrlConfig('<%= strURLPath %>/monitorConfig');" value="Update"/>
+					
+				</td>
+				</tr>
+			</table>
+			<br/>
+			</fieldset>
+		</div>	 --%>
+		<!-- ----------------------------------------------------------------------------------------------- -->
+			
 		
 		<div id="AlertConfigDiv" style="display: none;">
 			<fieldset style="width:98%;margin: auto;text-align:center;" >
@@ -517,8 +728,9 @@ TreeSet<String> sortedEDDomainList =  new TreeSet<String>(EDdomainList);
 				</th>
 				<th colspan="2" align="center">Select Domain : &nbsp;<select id="selectDom" onchange="filterOnDomainEnv('<%=strURLPath%>')">
 					<option value="All">--None--</option>
-						<%for(String domain :  sortedDomainList){%>
-							<option value="<%=domain.toLowerCase() %>"><%=domain%></option><%}%>
+						<%for(String domain :  sortedDomainList) { %>
+							<option value="<%=domain.toLowerCase() %>"><%=domain%></option>
+						<%}%>
 							</select>
 				</th>
 				</tr>
@@ -632,8 +844,9 @@ TreeSet<String> sortedEDDomainList =  new TreeSet<String>(EDdomainList);
 				<th colspan="1" align="center">Select Domain : &nbsp;
 					<select id="selectDomForED" onchange="filterOnDomainEnvED('<%=strURLPath%>')">
 					<option value="All">--None--</option>
-						<%for(String domain :  sortedEDDomainList){%>
-							<option value="<%=domain.toLowerCase() %>"><%=domain%></option><%}%>
+						<%for(String domain :  sortedEDDomainList) {%>
+							<option value="<%=domain.toLowerCase() %>"><%=domain%></option>
+						<%}%>
 					</select>&nbsp;&nbsp; OR &nbsp;&nbsp; Select VDC
 					<select id="selectVDCForED" onchange="filterOnVDCEnvED('<%=strURLPath%>')">
 					<option value="None">--None--</option>

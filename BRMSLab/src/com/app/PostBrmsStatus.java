@@ -65,7 +65,7 @@ public class PostBrmsStatus extends HttpServlet {
 					+ "\"url\": \"https://ibpm.cisco.com/prd2/brmsadmin/status\","
 					+ "\"domainUrl\": \"https://ibpm.cisco.com/ea/brmsadmin\"," + "}," + "\"to\":\"/topics/myTopic\""
 					+ "}";
-			postIOSNotification.sendNotification("mon",downDomainsLifecycle,downDomains,null);
+			//postIOSNotification.sendNotification("mon",downDomainsLifecycle,downDomains,null);
 
 		} else {
 			postdata = "{" + "\"notification\": {" + "\"title\": \"" + downDomainsLifecycle.toUpperCase()
@@ -74,7 +74,7 @@ public class PostBrmsStatus extends HttpServlet {
 					+ "\"url\": \"https://ibpm.cisco.com/prd2/brmsadmin/status\","
 					+ "\"domainUrl\": \"https://ibpm.cisco.com/ea/brmsadmin\"," + "}," + "\"to\":\"/topics/myTopic\""
 					+ "}";
-			postIOSNotification.sendNotification("mon",downDomainsLifecycle,downDomains,null);
+			//postIOSNotification.sendNotification("mon",downDomainsLifecycle,downDomains,null);
 		}
 
 		String postUrl = "https://gcm-http.googleapis.com/gcm/send";

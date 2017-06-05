@@ -70,27 +70,29 @@ public class BRMSDomainStatusJsonServlet extends HttpServlet {
 		//String[] uriSampleParams = sampleURI.split("\\/");
 		String[] uriParams = reqURI.split("\\/");
 		String contextPath = request.getContextPath();
-		String domainFromContextPath = contextPath.split("\\/")[1];
+		String domainFromContextPath = contextPath.split("\\/")[2];
 		System.out.println("Domain from context :" + domainFromContextPath);
-		//out.println(uriParams.length);
+		out.println(uriParams.length);
 		//out.println(uriSampleParams.length);
 		response.setContentType("application/json");
 		if (contextPath.contains("brmsadmin")) {
-			if (uriParams.length == 5) {
-				searchDomain = uriParams[4];
-				searchLifecycle = uriParams[3];
-			} else if (uriParams.length == 6) {
-				searchDomain = uriParams[4];
-				searchApp = uriParams[5];
-				searchLifecycle = uriParams[3];
+			
+			if (uriParams.length == 6) {
+				searchDomain = uriParams[5];
+				searchLifecycle = uriParams[4];
+			} else if (uriParams.length == 7) {
+				searchDomain = uriParams[5];
+				searchApp = uriParams[6];
+				searchLifecycle = uriParams[4];
 
-			} else if (uriParams.length == 4) {
+			} else if (uriParams.length == 5) {
+				
 				searchDomain = null;
 				searchApp = null;
-				searchLifecycle = uriParams[3];
+				searchLifecycle = uriParams[4];
 				// searchDomain = "cvc";
 				// searchApp = "score";
-			}
+			} 
 		} else {
 			if (uriParams.length == 3) {
 				searchDomain = domainFromContextPath;
@@ -292,6 +294,7 @@ public class BRMSDomainStatusJsonServlet extends HttpServlet {
 			}
 		}*/ 
 		//BrmsJsonUtil jsonUtil = new BrmsJsonUtil();
+		System.out.println(searchLifecycle+":"+searchDomain +":"+ searchApp);
 		String jsonOutput =  BrmsJsonUtil.getJson(searchLifecycle, searchDomain, searchApp);
 		out.println(jsonOutput);
 		

@@ -39,7 +39,7 @@ public class SendIOSNotification extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		PostIOSNotification postIOSNotification = new PostIOSNotification();
-		postIOSNotification.sendNotification(null, null, null);
+		postIOSNotification.sendNotification(null, null, null,null);
 		
 		/*ApnsService service = APNS.newService().withCert("/CiscoJars/ibpmcertificate.p12", "cisco123")
 			    .withSandboxDestination()

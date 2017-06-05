@@ -57,19 +57,20 @@ public class BRMSJsonPingStatusServlet extends HttpServlet {
 		String searchLifecycle =  "all";
 		String[] uriParams = reqURI.split("\\/");
 		response.setContentType("application/json");
+		out.println(uriParams.length);
 		
-		if (uriParams.length == 5) {
-			searchDomain = uriParams[4];
-			searchLifecycle =  uriParams[3];
-		} else if (uriParams.length == 6) {
-			searchDomain = uriParams[4];
-			searchApp = uriParams[5];
-			searchLifecycle =  uriParams[3];
+		if (uriParams.length == 6) {
+			searchDomain = uriParams[5];
+			searchLifecycle =  uriParams[4];
+		} else if (uriParams.length == 7) {
+			searchDomain = uriParams[5];
+			searchApp = uriParams[6];
+			searchLifecycle =  uriParams[4];
 			
-		} else if (uriParams.length == 4) {
+		} else if (uriParams.length == 5) {
 			searchDomain = null;
 			searchApp = null;
-			searchLifecycle =  uriParams[3];
+			searchLifecycle =  uriParams[4];
 		}
 		
 		/*if (uriParams.length == 4) {
@@ -83,7 +84,7 @@ public class BRMSJsonPingStatusServlet extends HttpServlet {
 			//searchDomain = "cvc";
 			//searchApp = "score";
 		} */
-		
+		System.out.println(searchLifecycle+":"+searchDomain +":"+ searchApp);
 		String jsonOutput =  BrmsJsonUtil.getJson(searchLifecycle, searchDomain, searchApp);
 		out.println(jsonOutput);
 		

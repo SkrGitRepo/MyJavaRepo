@@ -117,6 +117,93 @@ public class BrmsMonitorAdminServlet extends HttpServlet {
 			httpRequest.setAttribute("formAction", formAction);
 			httpRequest.getRequestDispatcher("./jsp/brmsMonitorAdmin.jsp?successParam=Monitor SMTP Config Updated Succesfully&view="+view).forward(httpRequest, httpResponse);
 		}
+		else if("UPDATE_PING_DOMAIN_LIST".equals(formAction)){
+			System.out.println("BrmsMonitorAdminServlet : "+formAction); 
+			File file = new File(monitorConfigBase+"/new_ping_url_domain_list.txt");
+			List<String> lines = FileUtils.readLines(file);
+			System.out.println("DEV LIST :"+httpRequest.getParameter("DEV_DOMAIN_LIST"));
+			System.out.println("LT LIST :"+httpRequest.getParameter("LT_DOMAIN_LIST"));
+			System.out.println("STAGE LIST :"+httpRequest.getParameter("STAGE_DOMAIN_LIST"));
+			/*for(int i=0;i<lines.size();i++){
+				String key = lines.get(i).split("=")[0];
+				String value=lines.get(i).split("=")[1];
+				if(key.equalsIgnoreCase("DEV")) {
+					lines.set(i, "dev="+httpRequest.getParameter("DEV_DOMAIN_LIST"));
+				} else if(key.equalsIgnoreCase("STAGE") || key.equalsIgnoreCase("STG") ) {
+					lines.set(i, "stage="+httpRequest.getParameter("STAGE_DOMAIN_LIST"));
+				} else if(!key.equalsIgnoreCase("LT") && httpRequest.getParameter("LT_DOMAIN_LIST") != null) {
+					lines.set(i, "lt="+httpRequest.getParameter("LT_DOMAIN_LIST"));
+				} else if(key.equalsIgnoreCase("LT")) {
+					lines.set(i, "lt="+httpRequest.getParameter("LT_DOMAIN_LIST"));
+				} else if(key.equalsIgnoreCase("PROD") || key.equalsIgnoreCase("PRD")) {
+					String PROD_LIST = httpRequest.getParameter("PROD_DOMAIN_LIST");
+					lines.set(i, "prod="+PROD_LIST);
+				}
+			}*/
+				if(httpRequest.getParameter("DEV_DOMAIN_LIST") != null) {
+					String dev_value = lines.get(0);
+					if(dev_value == null) {
+						lines.add(0, "dev="+httpRequest.getParameter("DEV_DOMAIN_LIST"));
+					} else {
+						lines.set(0, "dev="+httpRequest.getParameter("DEV_DOMAIN_LIST"));
+					}
+				} else if(httpRequest.getParameter("STAGE_DOMAIN_LIST") != null) {
+					String stg_value = lines.get(1);
+					//lines.contains("stage")
+					if(stg_value == null) {
+						lines.add(1, "stage="+httpRequest.getParameter("STAGE_DOMAIN_LIST"));
+					} else {
+						lines.set(1, "stage="+httpRequest.getParameter("STAGE_DOMAIN_LIST"));
+					}
+				} else if(httpRequest.getParameter("LT_DOMAIN_LIST") != null) {
+					String lt_value = lines.get(2);
+					if(lt_value == null) {
+						lines.add(2, "lt="+httpRequest.getParameter("LT_DOMAIN_LIST"));
+					} else {
+						lines.set(2, "lt="+httpRequest.getParameter("LT_DOMAIN_LIST"));
+					}
+				} else if( httpRequest.getParameter("PROD_DOMAIN_LIST") != null) {
+					String prod_value = lines.get(3);
+					if(prod_value == null) {
+						lines.add(3, "prod="+httpRequest.getParameter("PROD_DOMAIN_LIST"));
+					} else {
+						lines.set(3, "prod="+httpRequest.getParameter("PROD_DOMAIN_LIST"));
+					}
+				}
+//				lines.add("lt=csc,wpr");
+//				
+//				lines.set(1, "stage=cswwwww");
+//				lines.set(2, "lt=cscccccc");
+			
+			System.out.println("LINES:"+lines);
+			FileUtils.writeLines(file, lines);
+			httpRequest.setAttribute("formAction", formAction);
+			httpRequest.getRequestDispatcher("./jsp/brmsMonitorAdmin.jsp?successParam=Domain List Updated Succesfully&view="+view).forward(httpRequest, httpResponse);
+		}
+	else if("UPDATE_RR_CONFIG".equals(formAction)){
+		System.out.println("BrmsMonitorAdminServlet : "+formAction); 
+		File file = new File(monitorConfigBase+"/rr.conf");
+		List<String> lines = FileUtils.readLines(file);
+		for(int i=0;i<lines.size();i++){
+			String key = lines.get(i).split("=")[0];
+			String value=lines.get(i).split("=")[1];
+			if(key.equalsIgnoreCase("RR_EMAIL_TO")) {
+				String rr_email_to = httpRequest.getParameter("RR_EMAIL_TO");
+				if (rr_email_to.endsWith(",")) {
+					lines.set(i, "RR_EMAIL_TO="+ rr_email_to);
+				} else {
+					lines.set(i, "RR_EMAIL_TO="+ rr_email_to +",");
+				}
+			} else if(key.equalsIgnoreCase("RR_EMAIL_FROM")) {
+				lines.set(i, "RR_EMAIL_FROM="+httpRequest.getParameter("RR_EMAIL_FROM"));
+			} else if(key.equalsIgnoreCase("RR_WAIT_TIME")) {
+				lines.set(i, "RR_WAIT_TIME="+httpRequest.getParameter("RR_WAIT_TIME"));
+			}
+		}
+		FileUtils.writeLines(file, lines);
+		httpRequest.setAttribute("formAction", formAction);
+		httpRequest.getRequestDispatcher("./jsp/brmsMonitorAdmin.jsp?successParam=Rolling Restart Config Updated Succesfully&view="+view).forward(httpRequest, httpResponse);
+	}
 		else if("UPDATE_ALERT_CONTACT".equals(formAction)){
 			System.out.println("BrmsMonitorAdminServlet : "+formAction);
 			File file = new File(monitorConfigBase+"/alert_lists.conf");

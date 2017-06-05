@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>HostManagement</display-name>
+  <display-name>iBPMLab</display-name>
+  <servlet>
+		<servlet-name>emanServlet</servlet-name>
+		<servlet-class>com.cisco.brmspega.servlet.EmanServlet</servlet-class>
+	</servlet>
+  <servlet-mapping>
+		<servlet-name>emanServlet</servlet-name>
+		<url-pattern>/eman</url-pattern>
+	</servlet-mapping>	
   <servlet>
     <servlet-name>EmanResponse</servlet-name>
     <servlet-class>com.app.GetEmanResponseServlet</servlet-class>
@@ -105,7 +113,6 @@
     <servlet-name>helloServlet</servlet-name>
     <url-pattern>/hello</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>storeDeviceToken</servlet-name>
     <servlet-class>com.cisco.brmspega.servlet.StoreIOSDeviceToken</servlet-class>
@@ -114,8 +121,23 @@
     <servlet-name>storeDeviceToken</servlet-name>
     <url-pattern>/storetoken</url-pattern>
   </servlet-mapping>
-  
-  
+  <servlet>
+    <servlet-name>ServerActionService</servlet-name>
+    <servlet-class>com.cisco.brmspega.servlet.ServerActionService</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServerActionService</servlet-name>
+    <url-pattern>/serverAction</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Jersey Web Application</servlet-name>
+    <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Jersey Web Application</servlet-name>
+    <url-pattern>/api/*</url-pattern>
+  </servlet-mapping>
   <listener>
     <listener-class>com.cisco.brmspega.servlet.EmanPingJobManager</listener-class>
   </listener>

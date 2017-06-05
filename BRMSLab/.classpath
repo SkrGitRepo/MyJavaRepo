@@ -15,7 +15,6 @@
 	<classpathentry exported="true" kind="lib" path="C:/CiscoJars/java-json.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/CiscoJars/json-simple-1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/MyInstallations/eclipse-jee-mars-2-win32-x86_64/eclipse/BRMS_TEST_Workspace/BRMSAdmin2/WebContent/WEB-INF/lib/commons-io-1.4.jar"/>
-	<classpathentry kind="lib" path="C:/CiscoJars/data.jar"/>
 	<classpathentry kind="lib" path="C:/CiscoJars/CiscoBrmsPega.jar"/>
 	<classpathentry kind="lib" path="C:/CiscoJars/apns-0.2.3.jar"/>
 	<classpathentry kind="lib" path="C:/CiscoJars/logback-core-0.9.6.jar"/>
@@ -37,5 +36,11 @@
 	<classpathentry kind="lib" path="C:/CiscoJars/com.fasterxml.jackson.core.jar"/>
 	<classpathentry kind="lib" path="C:/CiscoJars/com.fasterxml.jackson.databind.jar"/>
 	<classpathentry kind="lib" path="C:/CiscoJars/com.fasterxml.jackson.annotations.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/asm-all-3.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/jsr311-api-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/json-20090211.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/jersey-bundle-1.14.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/IBPMDataConnect.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/kafka-clients-0.10.1.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
