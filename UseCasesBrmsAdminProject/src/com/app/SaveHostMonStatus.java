@@ -48,7 +48,7 @@ public class SaveHostMonStatus extends HttpServlet {
         	for(int i=0; i<Hosts.length; i++) {
         		
         		String array[] = Hosts[i].split(":", -1); 
-        		String hostRecordFile = "C:/Users/sumkuma2/J2EE_WorkSpace/UseCasesBrmsAdminProject/"+array[0]+"_disabled_host_file.txt";
+        		String hostRecordFile = "C:/Users/sumkuma2/git/MyJavaRepo/UseCasesBrmsAdminProject/"+array[0]+"_disabled_host_file.txt";
         		String hostName = array[1];
         		String hostPort = array[2];
         		String nodeName = hostName+":"+hostPort;

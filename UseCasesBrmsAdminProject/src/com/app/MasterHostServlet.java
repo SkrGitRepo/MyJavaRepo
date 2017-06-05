@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
-
 /**
  * Servlet implementation class MonitoringServlet
  */
@@ -46,7 +44,7 @@ public class MasterHostServlet extends HttpServlet {
 		List<String> list = new ArrayList<String>();
 		String json = null;
 		//String hostRecordFile = "C:/EAJavauseCasePrj/HostManagement/"+lifecycleName+"_host_file.txt";
-		String hostRecordFile = "C:/Users/sumkuma2/J2EE_WorkSpace/UseCasesBrmsAdminProject/"+lifecycleName+"_host_file.txt";
+		String hostRecordFile = "C:/Users/sumkuma2/git/MyJavaRepo/UseCasesBrmsAdminProject/"+lifecycleName+"_host_file.txt";
 		HostListBean hostItems = new HostListBean(); 
 		ArrayList<HostListBean> hostListItems = null;
 		
