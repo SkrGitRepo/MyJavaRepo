@@ -1,10 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"  pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@page import="java.util.HashMap"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
-<%@page import="com.sample.utility.BrmsJsonUtil"%>
 <%@page import="org.apache.http.client.methods.HttpPost"%>
 <%@page import="org.apache.http.entity.StringEntity"%>
 <%@page import="org.apache.http.client.HttpClient"%> 
-<%@page import="org.apache.http.impl.client.DefaultHttpClient"%>
 <%@page import="java.io.InputStreamReader"%>
 <%@page import="org.apache.http.HttpResponse"%>
 <%@page import="javax.xml.bind.DatatypeConverter"%>
@@ -18,14 +18,13 @@
 
 <%@page import="org.apache.commons.io.FileUtils" %>
 <%@page import="org.apache.commons.io.filefilter.WildcardFileFilter"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"  pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 
 
 <%
-	String vmCfgFileDir =  "/opt/brms/shared/scripts/";
+	String dbCfgFileDir =  "/opt/brms/install/";
 	String lifecycle = request.getParameter("lc");
-    String dataCenter = request.getParameter("dc");
+    //String dataCenter = request.getParameter("dc");
     Collection<File> fileList = new ArrayList<File>();
 	Iterator<File> fileListIterator = null;
 	List<String> hostList = new ArrayList<String>();
@@ -43,14 +42,17 @@
 		} else {
 			lcList = new String[] { lifecycle.toUpperCase() };
 		}
-	for (String lc : lcList) {
+	/* for (String lc : lcList) {
 		String env = lc;
 		if( dataCenter != null && lifecycle != null ) {
-			fileFilterString = "brms_vm_cfg_" + dataCenter + "_" + env + ".txt";
+			
+			fileFilterString = "BRMS_ALL_ALL_DOMAINs_DB_CONF_REPORT.csv";
 		} else if ( dataCenter != null && lifecycle != null ) {
 			fileFilterString = "brms_vm_cfg_*" + env + ".txt";
-		}
-		fileList = FileUtils.listFiles(new File(vmCfgFileDir), new WildcardFileFilter(fileFilterString), null);
+		} */
+		
+		fileFilterString = "BRMS_ALL_ALL_DOMAINs_DB_CONF_REPORT.csv";
+		fileList = FileUtils.listFiles(new File(dbCfgFileDir), new WildcardFileFilter(fileFilterString), null);
 		File file;
 		fileListIterator = fileList.iterator();
 		
@@ -65,22 +67,21 @@
 				for (String line : lines) {
 					if ((!line.contains("CONTEXT")) || (!line.contains(""))) {
 						if (!line.contains("#")) {
-							String[] tokens = line.split(",");
-							String[] domainPath = tokens[9].split("/");
+							//String[] tokens = line.split(",");
 
 							//String allOutput = tokens[10] + "|" + tokens[0] + "|" + tokens[1] + "|" + tokens[2]
 							//		+ "|" + tokens[3] + "|" + tokens[4] + "|" + tokens[5] + "|" + tokens[6] + "|"
 							//		+ tokens[7] + "|" + tokens[8] + "|" + tokens[9];
 							
-							String allOutput =  tokens[10] + "|" + tokens[0] + "|" + tokens[2] + "|" + tokens[3] + "|" + tokens[9];
+							//String allOutput =  tokens[10] + "|" + tokens[0] + "|" + tokens[2] + "|" + tokens[3] + "|" + tokens[9];
 							//System.out.println(allOutput);
-							hostList.add(allOutput);
+							hostList.add(line);
 						}
 					}
 				}
 			}
 		}
-	}
+	/* } */
 	
     }
 %>
@@ -89,8 +90,13 @@
 <title>BRMS Host Port Report</title>
 
 <head>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge" /> -->
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>EA OnRamp Process</title>
+		
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+		<script src="js/jquery-1.11.3/jquery-1.11.3.min.js"></script>
+		<script src="js/jquery-sparklines-2.1.2/jquery.sparkline.min.js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 
 		<script type="text/javascript">
@@ -101,18 +107,18 @@
 		}
 		
 		function filterOnDCEnv(path){
-			var dc=document.getElementById('selectDC').value;
+			//var dc=document.getElementById('selectDC').value;
 			var lc=document.getElementById('selectLC').value;
 			/* alert(env);
 			alert(dc);
 			var allpath = path + "/jsp/brms_host_active_port_report.jsp?env="+env+"&dc="+dc;
 			alert(allpath); */
-			document.reportPortForm.action = path + "/jsp/brms_host_active_port_report.jsp?lc="+lc+"&dc="+dc;
+			document.reportPortForm.action = path + "/jsp/brms_db_cfg__report.jsp?lc="+lc;
 			document.reportPortForm.submit();
 		}
 		
 		function onWindowLoad(){
-			var dataCenter ='<%=dataCenter%>';
+			var dataCenter ='<%=lifecycle%>';
 			var lfcly ='<%=lifecycle%>';
 			
 			
@@ -123,12 +129,12 @@
 				} 
 			}
 			
-			var selectDCObj=document.getElementById('selectDC');
+			/* var selectDCObj=document.getElementById('selectDC');
 			for (var i = 0; i < selectDCObj.options.length; i++) {
 				if (selectDCObj.options[i].text.toUpperCase() == dataCenter.toUpperCase()) {
 					selectDCObj.options[i].selected = true;
 				}
-			}
+			} */
 			
 		}
 		
@@ -139,18 +145,39 @@
 		<body onload="onWindowLoad()">
 		<br>
 		<div id="reportHostPort">
-		<fieldset style="width:60%;margin: auto;text-align:center;" >
-		<legend class="pageText" align="left"><b>BRMS Host/Port Report:</b></legend>
+		
+  		 
+    		<form class="form-horizontal">
+    		<fieldset>
+    		<legend>Legend</legend>
+     		  <div class="form-group">
+      			<label for="select" class="col-lg-2 control-label">Select Env</label>
+      			  <div class="col-lg-10">
+        			<select class="form-control" id="selectLC" name="lc" onchange="filterOnDCEnv('<%=strURLPath%>')">
+          				<option value="DEV">DEV</option>
+						<option value="STG">STG</option>
+						<option value="LT">LT</option>
+						<option value="PRD">PRD</option>
+						<option value="POC">POC</option>
+        			</select>
+      			</div>
+    		 </div>
+  		 </fieldset>
+		</form>
+		
+		
+		<%-- <fieldset style="width:60%;margin: auto;text-align:center;" >
+		<legend class="pageText" align="left"><b>BRMS DB CFG Report:</b></legend>
 		
 			<form action="" id="reportPortForm" name="reportPortForm" method="post">
 			<table border="1" cellspacing="2" cellpadding="2" bgcolor="#cee7ff" class="brmsTable" width="100%">
 				<tr>
 					<th align="center" width="30%" >Select Env</th>
-					<th align="center" width="30%" >Select DataCenter</th>
+					<!-- <th align="center" width="30%" >Select DataCenter</th> -->
 				</tr>
 				<tr>
 					<td align="center">
-					<select id="selectLC" name="lc" >
+					<select id="selectLC" name="lc" onchange="filterOnDCEnv('<%=strURLPath%>')">
 						<!-- <option value="ALL">ALL</option> -->
 						<option value="DEV">DEV</option>
 						<option value="STG">STG</option>
@@ -159,53 +186,50 @@
 						<option value="POC">POC</option>
 					</select>
 					</td>
-					
-					<td align="center">
-					<select id="selectDC" name="dc" onchange="filterOnDCEnv('<%=strURLPath%>')">
-						<option value="ALL">ALL</option>
-						<option value="NPRD1">NPRD1</option>
-						<option value="NPRD2">NPRD2</option>
-						<option value="PRD1">PRD1</option>
-						<option value="PRD2">PRD2</option>
-						<option value="PRD3">PRD3</option>
-						<option value="PRD4">PRD4</option>
-					</select>
-					</td>
-					
-					<td align="center">
-					<select id="selectDom" name="dc" onchange="filterOnDom('<%=strURLPath%>')">
-						<option value="ALL">ALL</option>
-						<option value="NPRD1">NPRD1</option>
-						<option value="NPRD2">NPRD2</option>
-						<option value="PRD1">PRD1</option>
-						<option value="PRD2">PRD2</option>
-						<option value="PRD3">PRD3</option>
-						<option value="PRD4">PRD4</option>
-					</select>
-					</td>
 				</tr>
+				
+				<select id="selectVDCHostForED" onchange="filterOnHostED('<%=strURLPath%>')">
+					<option value="None">--None--</option>
+						<%for(String vdcHostName :  sortedVDCHostList){%>
+							<option value="<%=vdcHostName %>"><%=vdcHostName%></option><%}%>
+				</select>
 				<!-- <tr>
 					<td colspan="2" align="center">
 						<input align="middle" type="submit" value="Find" id="find">
 						
 					</td>
-				</tr> -->
+				</tr> --> 
 			</table>
 			</form>
 		
+		 	--%>
 		
-		
-			<% if (!hostList.isEmpty()) { %>
+			<% if (!hostList.isEmpty() && lifecycle !=null ) { %>
 			<br/> <br/>
-			<table border="1" cellspacing="2" cellpadding="2" bgcolor="#cee7ff" class="brmsTable" width="100%">
+			<!-- <table border="1" cellspacing="2" cellpadding="2" bgcolor="#cee7ff" class="brmsTable" width="100%">
 				<tr>
 					<th align="left">JVM No.</th>
 					<th align="center" width="30%" colspan="2">LIFECYCLE</th>
-					<th align="center" width="30%" colspan="2">HOSTNAME</th>
-					<th align="center" width="30%" colspan="2">MANAGED PORT</th>
-					<th align="center" width="30%" colspan="2">ADMIN PORT</th>
-					<th align="center" width="30%" colspan="2">DOMAIN/APP</th>
-				</tr>
+					<th align="center" width="30%" colspan="2">DOMAIN NAME</th>
+					<th align="center" width="30%" colspan="2">DSN</th>
+					<th align="center" width="30%" colspan="2">JNDI</th>
+					<th align="center" width="30%" colspan="2">CON-STRING</th>
+					<th align="center" width="30%" colspan="2">SCHEMA</th>
+					<th align="center" width="30%" colspan="2">PASSWORD</th>
+				</tr> -->
+				<table class="table table-striped table-hover ">
+				  <thead>
+				    <tr>
+				      <th>JVM No.</th>
+				      <th>LIFECYCLE</th>
+				      <th>DOMAIN NAME</th>
+				      <th>DSN</th>
+				      <th>JNDI</th>
+				      <th>CON-STRING</th>
+				      <th>SCHEMA</th>
+				      <th>PASSWORD</th>
+				    </tr>
+				  </thead>
 				
 					<% 
 						Collections.sort(hostList);
@@ -216,39 +240,58 @@
 						
 						
 						for(String data :  hostList) {
-							//System.out.println("DATA: "+data);
-							String[] tokens = data.split("\\|");
 							
-						%>
-							<tr>
-							<td><%=count %></td>
-							<td colspan="2" ><%=tokens[0] %></td>
-							
-							<td colspan="2" ><%=tokens[1] %></td>
-							<% if (hostManagedPortMap.containsKey(tokens[3] + ":" + tokens[1])) { %>
-								<td colspan="2" bgcolor="red"><%=tokens[3] %></td>
-							<% } else {%>
-								<td colspan="2" ><%=tokens[3] %></td>
-							<%} %>
-							<% if (hostAdminPortMap.containsKey(tokens[2] + ":" + tokens[1])) { %>
-								<td colspan="2" bgcolor="red"><%=tokens[2] %></td>
-							<% } else {%>
+							String[] tokens = data.split("\\,");
+							System.out.println("Length"+tokens.length);
+							if (tokens[0].equalsIgnoreCase(lifecycle.toUpperCase())) {
+								System.out.println("DATA: "+data);
+							%>
+							<%-- 	<tr>
+								<td><%=count %></td>
+								<td colspan="2" ><%=tokens[0] %></td>
+								
+								<td colspan="2" ><%=tokens[1] %></td>
 								<td colspan="2" ><%=tokens[2] %></td>
-							<%} %>
-							<td colspan="2" ><%=tokens[4] %></td>
-							</tr>
-						<%
+								<td colspan="2" ><%=tokens[3] %></td>
+								<td colspan="2" ><%=tokens[4] %></td>
+								<td colspan="2" ><%=tokens[5] %></td>
+							<%if (tokens.length > 6) { %>
+								<td colspan="2" ><%=tokens[6] %></td>
+							<% } else { %>
+								<td colspan="2" >NA</td>
+							<% }%>
+								</tr> --%>
 							
-							//System.out.println("INSERTING ADMIN MAP: "+tokens[2] + ":" + tokens[1] +" => " +tokens[1]);
-							hostAdminPortMap.put(tokens[2] + ":" + tokens[1],tokens[1]);
-							//System.out.println("INSERTING MANAGED MAP: "+tokens[3] + ":" + tokens[1] +" => " +tokens[1]);
-							hostManagedPortMap.put(tokens[3] + ":" + tokens[1],tokens[1]);
-							count = count + 1;
-						}
+							 <tbody>
+							    <tr>
+							      <td><%=count %></td>
+							      <td><%=tokens[0] %></td>
+							      <td><%=tokens[1] %></td>
+							      <td><%=tokens[2] %></td>
+							      <td><%=tokens[3] %></td>
+							      <td><%=tokens[4] %></td>
+							      <td><%=tokens[5] %></td>
+							      <%if (tokens.length > 6) { %>
+								<td><%=tokens[6]%></td>
+							      <% } else { %>
+								<td>NA</td>
+							      <% }%>
+							    </tr>
+							
+							<%
+								count = count + 1; 
+							}
+							
+						} 
+						 
 						%>
-			</table>
+						
+			
+		<% }  else {%>
+			<tr><td>No matching data found</td></tr>
 		<% } %>
-		</fieldset>
+		</table>
+		<!-- </fieldset> -->
 		</div>			
 </body>
 </html>

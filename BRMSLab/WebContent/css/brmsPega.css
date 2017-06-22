@@ -1,0 +1,140 @@
+body {
+	 padding: 0;
+	 margin: 0;
+}
+.header {
+	font-family:arial,helvetica,clean,sans-serif;
+	background:#A6D5F7 url(../image/CiscoR2.png) repeat-x scroll left top;
+	border-bottom:1px solid #71B1DA;
+}
+.logo {
+	text-align:center;
+}
+.headerRight {
+	width:78.0%;
+}
+.border {
+	border-left:1px solid #A3C4E6;
+	border-right:1px solid #A3C4E6;
+	font-size:11px;
+	padding:0.3em 0.8em;
+	text-decoration:none;
+	color:#0E58A0;
+}
+.leftBorder {
+	border-left:1px solid #A3C4E6;
+	font-size:11px;
+	padding:0.3em 0.3em;
+	text-decoration:none;
+	color:#0E58A0;
+}
+.rightBorder {
+	border-right:1px solid #A3C4E6;
+	font-size:11px;
+	padding:0.3em 0.3em;
+	text-decoration:none;
+	color:#0E58A0;
+	font-weight: bold;
+}
+h5 {
+	font-style:normal;
+	margin:0.3em 0 0;
+	width:30.5em;
+	color:#465766;
+	font-weight:normal;
+	text-decoration:none;
+}
+.title {
+	color:#465766;
+	font-weight:normal;
+	text-decoration:none;
+	font-size:150%;
+}
+.grid_hover {
+	background-color:#7FFFD4;
+	font-size:11px;
+}
+.tableBorder_bottom { 
+	border-bottom: 1px solid black;
+	height:20px; 
+}
+.tableBorder_left_bottom { 
+	border-left: 1px solid black; 
+	border-bottom: 1px solid black;
+	height:20px; 
+}
+.rdPageErrorText{
+	font-family:arial,helvetica,clean,sans-serif;
+	font-size: 11px;
+	color: red;
+}
+.pageText {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+}
+.headerText {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 16px;
+}
+button, input[type="submit"], input[type="button"], .cus_btn {
+    color: #055A78;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+}
+textarea, input, select {
+    font-family: arial,helvetica,clean,sans-serif;
+    font-size: 11px;
+}
+
+.OddEvenTable{
+	font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px; 
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+.OddEvenTable th{ 
+	background: #FFFF;
+	border: 1px solid black;
+}
+
+.OddEvenTable td{ 
+	border: 1px solid black;
+}
+
+/*  Define the background color for all the ODD table columns  */
+.OddEvenTable tr:nth-child(even){ 
+	background: #CCC;
+	border: 1px solid black;
+}
+/*  Define the background color for all the EVEN table columns  */
+.OddEvenTable tr:nth-child(odd){
+	background: #FFF;
+	border: 1px solid black;
+}
+
+.brmsTable{
+	font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px; 
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+.brmsTable tr{
+	border: 1px solid black;
+}
+
+.brmsTable th{
+	border: 1px solid black;
+}
+
+.brmsTable td{ 
+	border: 1px solid black;
+}
+
+.input-disabled{
+	background-color:#EBEBE4;
+	border:1px solid #ABADB3;
+	padding:2px 1px;
+}
