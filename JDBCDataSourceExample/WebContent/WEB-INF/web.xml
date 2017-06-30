@@ -11,7 +11,7 @@
     <url-pattern>/testjndi</url-pattern>
   </servlet-mapping>
   
-    <servlet>
+  <servlet>
     <servlet-name>testPGJNDI</servlet-name>
     <servlet-class>com.journaldev.jdbc.datasource.JDBCPGDataSourceExample</servlet-class>
     <load-on-startup>1</load-on-startup>
@@ -20,6 +20,17 @@
     <servlet-name>testPGJNDI</servlet-name>
     <url-pattern>/testpgjndi</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>testOracleJNDI</servlet-name>
+    <servlet-class>com.journaldev.jdbc.datasource.JDBCOracleDataSourceExample</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>testOracleJNDI</servlet-name>
+    <url-pattern>/testorcjndi</url-pattern>
+  </servlet-mapping>
+  
   
   <resource-ref>
     <description>This app requires a mysql connection.</description>
@@ -31,6 +42,13 @@
   <resource-ref>
     <description>This app requires a postgres DB connection.</description>
     <res-ref-name>jdbc/MyPGDB</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
+  
+  <resource-ref>
+    <description>This app requires a Oracle DB connection.</description>
+    <res-ref-name>jdbc/PegaRULES</res-ref-name>
     <res-type>javax.sql.DataSource</res-type>
     <res-auth>Container</res-auth>
   </resource-ref>

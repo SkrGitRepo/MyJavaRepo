@@ -25,14 +25,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class JDBCPGDataSourceExample
  */
-@WebServlet("/JDBCPGDataSourceExample")
-public class JDBCPGDataSourceExample extends HttpServlet {
+@WebServlet("/JDBCOracleDataSourceExample")
+public class JDBCOracleDataSourceExample extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JDBCPGDataSourceExample() {
+    public JDBCOracleDataSourceExample() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -50,27 +50,27 @@ public class JDBCPGDataSourceExample extends HttpServlet {
 		ResultSet rs = null;
 		try{
 			ctx = new InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/MyPGDB");
+			DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/PegaRULES");
 			
 			con = ds.getConnection();
 			stmt = con.createStatement();
 			
-			rs = stmt.executeQuery("SELECT id, url, name FROM public.link ORDER BY id");
+			rs = stmt.executeQuery("SELECT PYUSERIDENTIFIER,PYUSERNAME from PR_OPERATORS WHERE rownum <5");
 			
 			PrintWriter out = response.getWriter();
             response.setContentType("text/html");
-            out.print("<html><body><h2>LINK DETAILS</h2>");
+            out.print("<html><body><h2>PEGA OPERTOR DETAILS</h2>");
             out.print("<table border=\"1\" cellspacing=10 cellpadding=5>");
-            out.print("<th>ID</th>");
-            out.print("<th>URL</th>");
-            out.print("<th>NAME</th>");
+            out.print("<th>USER IDENTIFIER</th>");
+            out.print("<th>USER NAME</th>");
+            //out.print("<th>NAME</th>");
             
             while(rs.next())
             {
                 out.print("<tr>");
-                out.print("<td>" + rs.getInt("id") + "</td>");
-                out.print("<td>" + rs.getString("url") + "</td>");
-                out.print("<td>" + rs.getString("name") + "</td>");
+                out.print("<td>" + rs.getString("pyuseridentifier") + "</td>");
+                out.print("<td>" + rs.getString("pyusername") + "</td>");
+                //out.print("<td>" + rs.getString("name") + "</td>");
                 out.print("</tr>");
             }
             out.print("</table></body><br/>");

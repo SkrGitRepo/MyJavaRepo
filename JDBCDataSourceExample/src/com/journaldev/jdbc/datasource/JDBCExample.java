@@ -41,7 +41,7 @@ public class JDBCExample {
 			 try 
 			    {
 			      Statement st = connection.createStatement();
-			      ResultSet rs = st.executeQuery("SELECT id, url, name FROM link ORDER BY id");
+			      ResultSet rs = st.executeQuery("SELECT id,url,name FROM link ORDER BY id");
 			      while ( rs.next() )
 			      {
 			        
