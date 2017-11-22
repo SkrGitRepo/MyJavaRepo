@@ -1,8 +1,0 @@
-eon-rch1-4-l:5678
-eon-rch1-6-l:5681
-eon-rtp5-7-l:5223
-eon-rtp5-8-l:5688
-eon-rch1-6-l:5681
-eon-rtp5-7-l:5223
-eon-rtp5-9-l:5273
-eon-rtp5-10-l:5685
