@@ -74,7 +74,8 @@ public class BRMSFileParseUtil {
 		return hostList;
 	}
 	
-	public void brms_vm_cfg_file_reader() {
+	public void brms_vm_cfg_get_domain_list() {
+		
 		
 	}
 }

@@ -4,7 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v7.0"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre7">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
@@ -15,7 +15,6 @@
 	<classpathentry exported="true" kind="lib" path="C:/CiscoJars/java-json.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/CiscoJars/json-simple-1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/MyInstallations/eclipse-jee-mars-2-win32-x86_64/eclipse/BRMS_TEST_Workspace/BRMSAdmin2/WebContent/WEB-INF/lib/commons-io-1.4.jar"/>
-	<classpathentry kind="lib" path="C:/CiscoJars/CiscoBrmsPega.jar"/>
 	<classpathentry kind="lib" path="C:/CiscoJars/apns-0.2.3.jar"/>
 	<classpathentry kind="lib" path="C:/CiscoJars/logback-core-0.9.6.jar"/>
 	<classpathentry kind="lib" path="C:/CiscoJars/slf4j-1.7.22/slf4j-api-1.7.22.jar"/>
@@ -42,5 +41,13 @@
 	<classpathentry kind="lib" path="C:/CiscoJars/jersey-bundle-1.14.jar"/>
 	<classpathentry kind="lib" path="C:/CiscoJars/IBPMDataConnect.jar"/>
 	<classpathentry kind="lib" path="C:/CiscoJars/kafka-clients-0.10.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/verasdk-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/verasdk-1.5.95.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/quartz-2.1.5.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/CSC-commons-cci.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/CSC-upload.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/JavaFlatSDK.jar"/>
+	<classpathentry kind="lib" path="C:/CiscoJars/CiscoBrmsPega.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

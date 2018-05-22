@@ -30,107 +30,26 @@
 	<script src="../js/jquery-sparklines-2.1.2/jquery.sparkline.min.js"></script> -->
 		
 </head>
-<body onload="setInitValues()">
+<body>
 
- <div class="container">
-<div class="row"><h3>BRSMAdmin Menu:</h3></div>
+<%-- <div>
+<%@include file="base.jsp"%>
+</div> --%>
+<%-- <div>
+
+<%@include file="brmsmenu.jsp"%>
+</div> --%>
+
+
+<div align="center">
+
+<table width="100%" border="1" cellspacing="2" cellpadding="2" bgcolor="#cee7ff">
+<tr width="100%"> <%@include file="base.jsp"%></tr>
+<tr>
+<td width="20%"><%@include file="brmsmenu.jsp"%></td>
+<td width="80%">World</td></tr>
+</table>
 </div>
-
-<div class="row">
-  <div class="span3">
-    <div class="well">
-        <div>
-            <ul class="nav nav-list">
-            	<li><label class="tree-toggle nav-header">BRMS Servers</label>
-                    <ul class="nav nav-list tree">
-                        <li><a href="#">Servers by VMList</a></li>
-                        <li><a href="#">Servers by EnvList</a></li>
-                        <li><a href="#">Servers by DomainList</a></li>
-                        <li><label class="tree-toggle nav-header">Buttons</label>
-                            <ul class="nav nav-list tree">
-                                <li><a href="#">Colors</a></li>
-                                <li><a href="#">Sizes</a></li>
-                                <li><label class="tree-toggle nav-header">Forms</label>
-                                    <ul class="nav nav-list tree">
-                                        <li><a href="#">Horizontal</a></li>
-                                        <li><a href="#">Vertical</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li class="divider"></li>
-                <li><label class="tree-toggle nav-header"><a href="#">BRMS Onramp</a></label>
-                <li class="divider"></li>
-                <li><label class="tree-toggle nav-header">BRMS LDAP</label>
-                    <ul class="nav nav-list tree">
-                        <li><a href="#">All Ldap Listing</a></li>
-                        <li><a href="#">Ldap Group Listing</a></li>
-                        <li><a href="#">Ldap User Listing</a></li>
-                        <li><label class="tree-toggle nav-header">Create Ldap Mapping</label>
-                            <ul class="nav nav-list tree">
-                                <li><a href="#">OnRamp - EA Process</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li class="divider"></li>
-                <li><label class="tree-toggle nav-header">Server Monitoring</label>
-                    <ul class="nav nav-list tree">
-                        <li><a href="#">Pega Health</a></li>
-                        <li><a href="#">Database Health</a></li>
-                        <li><a href="#">BRMS Monitoring System</a></li>
-                    </ul>
-                </li>
-                
-                <li class="divider"></li>
-                <li><label class="tree-toggle nav-header">BRMS Support</label>
-                    <ul class="nav nav-list tree">
-                        <li><a href="#">Manage Servers</a></li>
-                        <li><a href="#">Database Health</a></li>
-                        <li><a href="#">BRMS Monitoring System</a></li>
-                    </ul>
-                </li>
-                
-                <li class="divider"></li>
-                <li><label class="tree-toggle nav-header">Responsive</label>
-                    <ul class="nav nav-list tree">
-                        <li><a href="#">Overview</a></li>
-                        <li><a href="#">CSS</a></li>
-                        <li><label class="tree-toggle nav-header">Media Queries</label>
-                            <ul class="nav nav-list tree">
-                                <li><a href="#">Text</a></li>
-                                <li><a href="#">Images</a></li>
-                                <li><label class="tree-toggle nav-header">Mobile Devices</label>
-                                    <ul class="nav nav-list tree">
-                                        <li><a href="#">iPhone</a></li>
-                                        <li><a href="#">Samsung</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><label class="tree-toggle nav-header">Coding</label>
-                            <ul class="nav nav-list tree">
-                                <li><a href="#">JavaScript</a></li>
-                                <li><a href="#">jQuery</a></li>
-                                <li><label class="tree-toggle nav-header">HTML DOM</label>
-                                    <ul class="nav nav-list tree">
-                                        <li><a href="#">DOM Elements</a></li>
-                                        <li><a href="#">Recursive</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-    </div>
-</div>
-
-<!-- <vr/> -->
 
 </body>
 </html>

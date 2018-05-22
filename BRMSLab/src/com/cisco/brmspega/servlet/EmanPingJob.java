@@ -46,11 +46,11 @@ public class EmanPingJob implements Runnable {
 	public void run() { 
 		
 		long startEmanPingTime = System.currentTimeMillis();
-		//System.out.println("********** START OF EMAN PING TIME :"+startEmanPingTime);
+		System.out.println("********** START OF EMAN PING TIME :"+startEmanPingTime);
 		
 		try {
 			getAllEMANStatus = collectEMANStatus();
-			prepare_domain_app_down_notification(getDownStatus,getAllEMANStatus);
+			//prepare_domain_app_down_notification(getDownStatus,getAllEMANStatus);
 			
 			
 			
@@ -60,9 +60,9 @@ public class EmanPingJob implements Runnable {
 		}
 		
 		long endEmanPingTime = System.currentTimeMillis();
-		//System.out.println("********** END OF EMAN PING TIME :"+endEmanPingTime);
+		System.out.println("********** END OF EMAN PING TIME :"+endEmanPingTime);
 		long elapsedEmanPingTime = (endEmanPingTime - startEmanPingTime);
-		//System.out.println("***** TOTAL EMAN PING EXECUTION TIME :"+ elapsedEmanPingTime);
+		System.out.println("***** TOTAL EMAN PING EXECUTION TIME :"+ elapsedEmanPingTime);
 		
 	}
 
@@ -174,8 +174,8 @@ public class EmanPingJob implements Runnable {
 		Iterator<File> fileListIterator = null;
 		
 		//String[] lifecycle = { "POC" };
-		//String[] lifecycle = { "PRD" };
-		String[] lifecycle = { "PRD","STG","DEV","LT" };
+		//String[] lifecycle = { "STG" };
+		String[] lifecycle = { "PRD","STG","DEV","LT","POC" };
 		if ( lifecycle.length >= 4 && lifecycle[4].equals("poc")) {
 			MYTHREADS = 2;
 		}

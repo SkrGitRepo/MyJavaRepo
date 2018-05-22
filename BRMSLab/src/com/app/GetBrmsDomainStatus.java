@@ -39,10 +39,13 @@ public class GetBrmsDomainStatus extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String reqURI = request.getRequestURI();
 		String[] uriParams = reqURI.split("\\/");
+		
+		System.out.println("REQ URI:"+reqURI);
 		System.out.println("URI LENGHT:"+uriParams.length);
 		//String contextPath = request.getContextPath();
 		//String domainFromContextPath = contextPath.split("\\/")[1];
 		String jsonString = IOUtils.toString(request.getInputStream());
+		System.out.println("JSON STRING:"+jsonString);
 		String message = null;
 	    
 		Load load = new Load();
@@ -57,20 +60,30 @@ public class GetBrmsDomainStatus extends HttpServlet {
 		}
 			 
 		try {
+			System.out.println("DOMAIN:"+searchDomain);
 			if ( (searchType != null) && (searchType.equalsIgnoreCase("history")) && (searchDomain != null) ) {
+				System.out.println(" Call History");
 				//message = searchType + "," + domainFromContextPath;
-				message = load.searchHistory(searchDomain, jsonString);
+				//message = load.searchHistory(searchDomain, jsonString);
+				message = load.search(searchDomain+"_history", jsonString);
 			} else if ((searchDomain != null) && (searchType == null)){
-				message = load.search(searchDomain, jsonString);
+				System.out.println(" Call serach");
+				try {
+					message = load.search(searchDomain, jsonString);
+				} catch (Exception e) {
+					System.out.println("ERRORRRRR"+e.toString());
+				}
 				
 			} 
 		} catch (Throwable t) {
 			message = "200 " + t.toString();
+		
 		}
 		
-		if (message == null)
+		if (message == null) {
+			System.out.println("NULL"+message);
 			message = "No matching result.";
-		
+		}
 		System.out.println("MESAAAGE VALUE :"+message);
 		response.setContentType("text/plain");
 		response.setContentLength(message.length());

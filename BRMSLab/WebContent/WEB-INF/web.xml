@@ -2,13 +2,13 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>iBPMLab</display-name>
   <servlet>
-		<servlet-name>emanServlet</servlet-name>
-		<servlet-class>com.cisco.brmspega.servlet.EmanServlet</servlet-class>
-	</servlet>
+    <servlet-name>emanServlet</servlet-name>
+    <servlet-class>com.cisco.brmspega.servlet.EmanServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
-		<servlet-name>emanServlet</servlet-name>
-		<url-pattern>/eman</url-pattern>
-	</servlet-mapping>	
+    <servlet-name>emanServlet</servlet-name>
+    <url-pattern>/eman</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>EmanResponse</servlet-name>
     <servlet-class>com.app.GetEmanResponseServlet</servlet-class>
@@ -57,6 +57,24 @@
     <servlet-name>UrlRedirect</servlet-name>
     <url-pattern>/redirect</url-pattern>
   </servlet-mapping>
+  <servlet>
+    	<servlet-name>disableMonitoringActionServlet</servlet-name>
+    	<servlet-class>com.cisco.brmspega.servlet.DisableMonitoringActionServlet</servlet-class>
+  	</servlet>
+  	<servlet-mapping>
+    	<servlet-name>disableMonitoringActionServlet</servlet-name>
+    	<url-pattern>/disablemon</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    	<servlet-name>getJVMstartStatusServlet</servlet-name>
+    	<servlet-class>com.cisco.brmspega.servlet.GetJVMLastStartDateStatusServlet</servlet-class>
+  	</servlet>
+  	<servlet-mapping>
+    	<servlet-name>getJVMstartStatusServlet</servlet-name>
+    	<url-pattern>/jvmstartstatus</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>SendNotificationToApns</servlet-name>
     <servlet-class>com.cisco.brmspega.servlet.SendIOSNotification</servlet-class>
@@ -134,6 +152,14 @@
     <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
+  <servlet>
+    <servlet-name>saveFile</servlet-name>
+    <servlet-class>com.cisco.brmspega.servlet.saveFile</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>saveFile</servlet-name>
+    <url-pattern>/savefile</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Jersey Web Application</servlet-name>
     <url-pattern>/api/*</url-pattern>

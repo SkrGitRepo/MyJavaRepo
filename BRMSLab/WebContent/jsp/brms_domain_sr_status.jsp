@@ -65,7 +65,8 @@
     		String jsonString = "{  $or: [ {'_id' :'" + jsonStr + "' } ] }";
     		Load load = new Load();
 			if ( (searchType != null) && (searchType.equalsIgnoreCase("history")) && (searchDomain != null) ) {
-				respMessage = load.searchHistory(searchDomain, jsonString);
+				//respMessage = load.searchHistory(searchDomain, jsonString);
+				respMessage = load.search(searchDomain+"_history", jsonString);
 			} else if ((searchType != null) && (searchType.equalsIgnoreCase("status")) && (searchDomain != null)){
 				respMessage = load.search(searchDomain, jsonString);
 				

@@ -24,6 +24,7 @@ public class EmanPingJobManager implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
 		// TODO Auto-generated method stub
+		System.out.println("STARTING EMAN PING");
 		//schedulerService = Executors.newSingleThreadScheduledExecutor();
 		//schedulerService.scheduleAtFixedRate(EmanPingJob.getInstance(),0,pingInterval, TimeUnit.MINUTES);
 		String hostname;

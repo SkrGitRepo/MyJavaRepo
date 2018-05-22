@@ -72,7 +72,7 @@ if (dbCfgFile.exists()) {
 <title>BRMS DB CONFIG Report</title>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<%@include file="headerHead.jsp"%>
+
 <script type="text/javascript"
 src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script type="text/javascript">
@@ -223,7 +223,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 </head>
 
 <body onload="onWindowLoad()">
-<%@include file="headerBody.jsp"%>
+
 <br>
 <div id="reportDBConfig">
 	<fieldset style="width: 60%; margin: auto; text-align: center;">

@@ -367,39 +367,73 @@ public class BrmsJsonUtil {
 	public static String createDomainProxyURL (String lifecycle, String domain, String dApp){
 		
 		String proxyURL = null;
+		String urlProtocol = "https";
+		String serverDomain = null;
+		String adminProxyType = "ibpmadm";
 		
-		if (lifecycle.equals("dev")){
-			if(dApp == null) {
-				proxyURL = "https://ibpm-dev.cisco.com/"+domain+"/brmsadmin/eman";
-			} else {
-				proxyURL = "https://ibpm-dev.cisco.com/"+domain+"/"+dApp+"/brmsadmin/eman";
+		if ( adminProxyType != null && adminProxyType.equalsIgnoreCase("ibpmadm")) {
+			if (lifecycle.equalsIgnoreCase("dev")) {
+				serverDomain = "ibpmadm-dev.cisco.com";
+			} else if (lifecycle.equalsIgnoreCase("stage")) {
+				serverDomain = "ibpmadm-stage.cisco.com";
+			} else if (lifecycle.equalsIgnoreCase("lt")) {
+				serverDomain = "ibpmadm-lt.cisco.com";
+			} else if (lifecycle.equalsIgnoreCase("poc")) {
+				serverDomain = "ibpm-poc.cisco.com";
+			} else if (lifecycle.equalsIgnoreCase("prod")) {
+				serverDomain = "ibpmadm.cisco.com";
 			}
-		} else if(lifecycle.equals("stage")) {
-			if(dApp == null) {
-				proxyURL = "https://ibpm-stage.cisco.com/"+domain+"/brmsadmin/eman";
-			} else {
-				proxyURL = "https://ibpm-stage.cisco.com/"+domain+"/"+dApp+"/brmsadmin/eman";
-			}
-		} else if(lifecycle.equals("lt")) {
-			if(dApp == null) {
-				proxyURL = "https://ibpm-lt.cisco.com/"+domain+"/brmsadmin/eman";
-			} else {
-				proxyURL = "https://ibpm-lt.cisco.com/"+domain+"/"+dApp+"/brmsadmin/eman";
-			}
-		} else if (lifecycle.equals("poc")) {
-			if(dApp == null) {
-				proxyURL = "https://ibpm-poc.cisco.com/"+domain+"/brmsadmin/eman";
-			} else {
-				proxyURL = "https://ibpm-poc.cisco.com/"+domain+"/"+dApp+"/brmsadmin/eman";
-			}
-		} else if (lifecycle.equals("prod")) {
-			if(dApp == null) {
-				proxyURL = "https://ibpm.cisco.com/"+domain+"/brmsadmin/eman";
-			} else {
-				proxyURL = "https://ibpm.cisco.com/"+domain+"/"+dApp+"/brmsadmin/eman";
+		} else {
+			if (lifecycle.equalsIgnoreCase("dev")) {
+				serverDomain = "ibpmadm-dev.cisco.com";
+			} else if (lifecycle.equalsIgnoreCase("stage")) {
+				serverDomain = "ibpmadm-stage.cisco.com";
+			} else if (lifecycle.equalsIgnoreCase("lt")) {
+				serverDomain = "ibpmadm-lt.cisco.com";
+			} else if (lifecycle.equalsIgnoreCase("poc")) {
+				serverDomain = "ibpm-poc.cisco.com";
+			} else if (lifecycle.equalsIgnoreCase("prod")) {
+				serverDomain = "ibpmadm.cisco.com";
 			}
 		}
 		
+		
+		if (lifecycle.equals("dev")) {
+			if (dApp == null) {
+				proxyURL = urlProtocol + "://" + serverDomain +"/" + domain + "/PRRestService/CiscoSample/Services/eman";
+			} else {
+				serverDomain = "ibpm-dev.cisco.com";
+				proxyURL = urlProtocol + "://" + serverDomain +"/" + domain + "/" + dApp + "/PRRestService/CiscoSample/Services/eman";
+			}
+		} else if (lifecycle.equals("stage")) {
+			if (dApp == null) {
+				proxyURL = urlProtocol + "://" + serverDomain +"/" + domain + "/PRRestService/CiscoSample/Services/eman";
+			} else {
+				serverDomain = "ibpm-stage.cisco.com";
+				proxyURL = urlProtocol + "://" + serverDomain +"/" + domain + "/" + dApp + "/PRRestService/CiscoSample/Services/eman";
+			}
+		} else if (lifecycle.equals("lt")) {
+			if (dApp == null) {
+				proxyURL = urlProtocol + "://" + serverDomain +"/" + domain + "/PRRestService/CiscoSample/Services/eman";
+			} else {
+				serverDomain = "ibpm-lt.cisco.com";
+				proxyURL = urlProtocol + "://" + serverDomain +"/" + domain + "/" + dApp + "/PRRestService/CiscoSample/Services/eman";
+			}
+		} else if (lifecycle.equals("poc")) {
+			if (dApp == null) {
+				proxyURL = urlProtocol + "://" + serverDomain +"/" + domain + "/PRRestService/CiscoSample/Services/eman";
+			} else {
+				serverDomain = "ibpm-poc.cisco.com";
+				proxyURL = urlProtocol + "://" + serverDomain +"/" + domain + "/" + dApp + "/PRRestService/CiscoSample/Services/eman";
+			}
+		} else if (lifecycle.equals("prod")) {
+			if (dApp == null) {
+				proxyURL = urlProtocol + "://" + serverDomain +"/" + domain + "/PRRestService/CiscoSample/Services/eman";
+			} else {
+				serverDomain = "ibpm.cisco.com";
+				proxyURL = urlProtocol + "://" + serverDomain +"/" + domain + "/" + dApp + "/PRRestService/CiscoSample/Services/eman";
+			}
+		}
 		return proxyURL;
 		
 	}

@@ -23,18 +23,29 @@ public class LdapUtilLocal {
       private ArrayList userGroups;
       private ArrayList users;
       private Object enumeration;
-	  public static final String strEnv = "PROD";//System.getProperty("cisco.life");
-	  private static final String principalUser = "uid=brm.gen,OU=Generics,O=cco.cisco.com";//PropertyLoader.getInstance().getProperty("ldap_principal_user");
-	  private static final String principalPassword = "brmGen123";//PropertyLoader.getInstance().getProperty("ldap_principal_password");
+	  public static final String strEnv = "prod";//System.getProperty("cisco.life");
+	  //private static final String principalUser = "uid=brm.gen,OU=Generics,O=cco.cisco.com";//PropertyLoader.getInstance().getProperty("ldap_principal_user");
+	  //private static final String principalPassword = "brmGen123";//PropertyLoader.getInstance().getProperty("ldap_principal_password");
+	  static String genID= "ibpmldap.gen"; //ibpmldap.gen
+	  static String genIDPwd="ibpmLdap_123";//ibpmLab_123
+	  private static final String principalUser = "uid="+genID+",OU=Generics,O=cco.cisco.com";
+	  //private static final String principalUser = "uid="+genID+",OU=Generics,O=dsxdev.cisco.com";
+	  //PropertyLoader.getInstance().getProperty("ldap_principal_user");
+	  private static final String principalPassword = genIDPwd;//"Ibpm-1234";//PropertyLoader.getInstance().getProperty("ldap_principal_password");
 	  public static final String ldapUrl;
 	  public static int ldap_count;
   
   static
   {
     if ((strEnv != null) && (strEnv.equalsIgnoreCase("PROD"))) {
+    	System.out.println("Production :: "+ strEnv+" :: LDAP");
       ldapUrl = "ldap://dsx.cisco.com:389";
-    } else {
-      ldapUrl = "ldap://dsxstage.cisco.com:389";
+    } else if ((strEnv != null) && (strEnv.equalsIgnoreCase("STAGE"))) {
+    	System.out.println("non-pord :: "+ strEnv+" :: LDAP");
+        ldapUrl = "ldap://dsxstage.cisco.com:389";
+     } else {
+    	System.out.println("non-pord :: " +strEnv +" :: LDAP");
+      ldapUrl = "ldap://dsxdev.cisco.com:389";
     }
   }
   

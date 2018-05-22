@@ -17,6 +17,10 @@
 <%@page import="java.util.Collections" %>
 <%@page import="java.util.ArrayList" %>
 <%@page import="java.util.Iterator" %>
+<%@page import="com.sample.utility.BrmsJsonUtil"%>
+<%@page import="com.cisco.csc.sdk.test.TestService_Upload"%>
+
+
 
 <%@page import="org.apache.commons.io.FileUtils" %>
 <%@page import="org.apache.commons.io.filefilter.WildcardFileFilter"%>
@@ -24,6 +28,8 @@
 
 
 <%
+
+	TestService_Upload cscObj = new TestService_Upload();
 	String dbCfgFileDir =  "/opt/brms/install/";
 	String lifecycle = request.getParameter("lc");
     //String dataCenter = request.getParameter("dc");
@@ -96,9 +102,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>EA OnRamp Process</title>
 		
-		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
-		<script src="js/jquery-1.11.3/jquery-1.11.3.min.js"></script>
-		<script src="js/jquery-sparklines-2.1.2/jquery.sparkline.min.js"></script>
+		<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
+		<script src="../js/jquery-1.11.3/jquery-1.11.3.min.js"></script>
+		<script src="../js/jquery-sparklines-2.1.2/jquery.sparkline.min.js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 
 		<script type="text/javascript">

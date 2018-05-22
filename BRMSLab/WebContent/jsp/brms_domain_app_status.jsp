@@ -242,7 +242,7 @@ java.net.HttpURLConnection,com.google.gson.Gson,com.google.gson.GsonBuilder,org.
 						<%} %>
 						<td bgcolor="<%=bgColor%>" style="border: 1px solid LightGray;"><i><a href=<%=domainChildProxyUrl%> target="_blank"><font color="white"><%=domainChildMonStatus%></font></a></i></td></tr>
 				<%
-					} else if (dom_json == null){
+					} else if (dom_json == null) {
 						%>	
 						<tr>
 						<% if (domainAllChildJson.has("APPS"))  { %>
